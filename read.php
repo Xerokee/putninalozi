@@ -12,7 +12,7 @@ include 'Osoba.php';
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $rbr = $data['r.br.'];
+    $rbr = $data['rbr'];
     $odobreno = $data['odobreno'];
 
     $sQuery = "UPDATE putninalog SET odobreno = :odobreno WHERE `r.br.` = :rbr";
@@ -27,10 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         echo json_encode(array('message' => 'Neuspjesno odobrenje'));
     }
     exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    $rbr = $_GET['r.br.'];
+} else if($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    $rbr = $_GET['rbr'];
 
     $sQuery = "DELETE FROM putninalog WHERE `r.br.` = :rbr";
     $stmt = $oConnection->prepare($sQuery);
@@ -43,9 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         echo json_encode(array('message' => 'Neuspjesno brisanje'));
     }
     exit();
-}
-
-$sQuery = "SELECT * FROM putninalog";
+} else if($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $sQuery = "SELECT * FROM putninalog";
 $oRecord = $oConnection->query($sQuery);
 $oPutniNalozi = array();
 while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
@@ -100,4 +97,5 @@ while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH))
 }
 
 echo json_encode($oPutniNalozi);
+}
 

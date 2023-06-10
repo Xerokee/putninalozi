@@ -30,12 +30,13 @@ export default function ParentComponent() {
   }, []);
 
   const Odobrenje = (rbr) => {
+    console.log(rbr)
     if (!post) return;
     const updatedPosts = post.map((item) => {
       if (item.rbr === rbr) {
         const updatedItem = { ...item, odobreno: !item.odobreno };
         axios
-          .put(`http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php?r.br.=${rbr}`, updatedItem)
+          .put(`http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php?rbr=${rbr}`, updatedItem)
           .then(() => {
             console.log('Odobrenje je uspjesno promijenjeno!');
           })
@@ -52,7 +53,7 @@ export default function ParentComponent() {
   const Brisanje = (rbr) => {
     if (!post) return;
     axios
-      .delete(`http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php?r.br.=${rbr}`)
+      .delete(`http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php?rbr=${rbr}`)
       .then(() => {
         console.log('Nalog je izbrisan!');
       })
