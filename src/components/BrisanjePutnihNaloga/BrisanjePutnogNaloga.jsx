@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import PutniNalogTable from './PutniNalogTable';
+import { useState } from 'react';
+import PutniNalogTable from '../PutniNalogTable/PutniNalogTable';
 
-const PutniNalogApp = () => {
+const BrisanjePutnihNaloga = () => {
   const [putniNalozi, postaviPutneNaloge] = useState();
 
   const handleBrisanjePutnihNaloga = (rbr) => {
@@ -22,4 +22,4 @@ const PutniNalogApp = () => {
   );
 };
 
-export default PutniNalogApp;
+export default BrisanjePutnihNaloga;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavigationJSX from './Navigation';
+import NavigationJSX from '../Navigation/Navigation';
 
 export default function DodajPutniNalog() {
   const [Polaziste, setPolaziste] = useState("");

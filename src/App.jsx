@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import PutniNalogTable from './components/PutniNalogTable'
-import DodajPutniNalog from './components/DodajPutniNalog'
+import PutniNalogTable from './components/PutniNalogTable/PutniNalogTable'
+import DodajPutniNalog from './components/DodajPutniNalog/DodajPutniNalog'
 
 function App() {
 

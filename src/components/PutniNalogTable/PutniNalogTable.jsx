@@ -1,8 +1,7 @@
-import React from 'react';
 import axios from "axios";
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavigationJSX from "./Navigation";
+import NavigationJSX from "../Navigation/Navigation";
 import PropTypes from 'prop-types';
 
 export default function ParentComponent() {
