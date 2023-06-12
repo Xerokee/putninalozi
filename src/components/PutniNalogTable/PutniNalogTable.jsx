@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationJSX from "../Navigation/Navigation";
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 export default function ParentComponent() {
   const [post, setPost] = useState(null);
@@ -140,7 +141,11 @@ export function PutniNalogTable({
           <tbody>
             {post.map((item) => (
               <tr key={item.rbr} onClick={() => setSelectedTravelOrder(item)}>
-                <td><a href="#">Pregledaj</a></td>
+                <td>
+                  <Link to={{ pathname: `nalog/${item.rbr}` }}>
+                    Pregledaj
+                  </Link>
+                </td>
                 <td>{item.rbr}</td>
                 <td>{item.polaziste}</td>
                 <td>{item.odrediste}</td>

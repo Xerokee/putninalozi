@@ -10,7 +10,7 @@ class PutniNalog
 	public $broj_dana = "";
 	public $odobreno = "";
 	public $zaposlenici_imena;
-	protected $zaposlenici;
+	public $zaposlenici;
 
 	public function __construct($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno)
 	{
