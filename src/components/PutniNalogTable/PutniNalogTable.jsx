@@ -30,7 +30,6 @@ export default function ParentComponent() {
   }, []);
 
   const Odobrenje = (rbr) => {
-    console.log(rbr)
     if (!post) return;
     const updatedPosts = post.map((item) => {
       if (item.rbr === rbr) {
@@ -116,7 +115,6 @@ export function PutniNalogTable({
       });
   }, [setPost]);
 
-  console.log(post);
   if (!post) return null;
 
   return (

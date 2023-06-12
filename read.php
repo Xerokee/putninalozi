@@ -30,6 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 } else if($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $rbr = $_GET['rbr'];
 
+    $sQuery = "DELETE FROM zaposlenici_nalog WHERE `rbrNaloga` = :rbr";
+    $stmt = $oConnection->prepare($sQuery);
+    $stmt->bindParam(':rbr', $rbr);
+    $stmt->execute();
+
     $sQuery = "DELETE FROM putninalog WHERE `r.br.` = :rbr";
     $stmt = $oConnection->prepare($sQuery);
     $stmt->bindParam(':rbr', $rbr);
