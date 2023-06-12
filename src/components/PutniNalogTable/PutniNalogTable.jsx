@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 export default function ParentComponent() {
   const [post, setPost] = useState(null);
-  const [selectedTravelOrder, setSelectedTravelOrder] = useState(null);
   const [zaposlenici, setZaposlenici] = useState([]);
 
   useEffect(() => {
@@ -64,21 +63,6 @@ export default function ParentComponent() {
     setPost(updatedPosts);
   };
 
-  const openTravelOrderDetails = () => {
-    if (selectedTravelOrder) {
-      const windowFeatures = 'width=800,height=600,scrollbars=yes,resizable=yes';
-      const newWindow = window.open('', '_blank', windowFeatures);
-      newWindow.document.write('<html><head><title>Travel Order Details</title></head><body>');
-      newWindow.document.write('<h1>Travel Order Details</h1>');
-      newWindow.document.write('<p>R.br.: ' + selectedTravelOrder.rbr + '</p>');
-      newWindow.document.write('<p>Polazište: ' + selectedTravelOrder.polaziste + '</p>');
-      newWindow.document.write('<p>Odredište: ' + selectedTravelOrder.odrediste + '</p>');
-
-      newWindow.document.write('</body></html>');
-      newWindow.document.close();
-    }
-  };
-
   return (
     <div>
       <h1>Putni Nalog Table</h1>
@@ -87,8 +71,6 @@ export default function ParentComponent() {
         setPost={setPost}
         Odobrenje={Odobrenje}
         Brisanje={Brisanje}
-        setSelectedTravelOrder={setSelectedTravelOrder}
-        openTravelOrderDetails={openTravelOrderDetails}
         zaposlenici={zaposlenici}
       />
     </div>
@@ -101,9 +83,7 @@ export function PutniNalogTable({
   setPost,
   Odobrenje,
   Brisanje,
-  openTravelOrderDetails
 }) {
-  const [selectedTravelOrder, setSelectedTravelOrder] = useState(null);
 
   useEffect(() => {
     axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php")
@@ -140,7 +120,7 @@ export function PutniNalogTable({
           </thead>
           <tbody>
             {post.map((item) => (
-              <tr key={item.rbr} onClick={() => setSelectedTravelOrder(item)}>
+              <tr key={item.rbr}>
                 <td>
                   <Link to={{ pathname: `nalog/${item.rbr}` }}>
                     Pregledaj
@@ -164,9 +144,6 @@ export function PutniNalogTable({
             ))}
           </tbody>
         </table>
-        <button onClick={openTravelOrderDetails} disabled={!selectedTravelOrder}>
-          Otvori Detalje Putnog Naloga
-        </button>
       </div>
     </>
   );
@@ -177,6 +154,4 @@ PutniNalogTable.propTypes = {
   setPost: PropTypes.func,
   Odobrenje: PropTypes.func.isRequired,
   Brisanje: PropTypes.func.isRequired,
-  setSelectedTravelOrder: PropTypes.func.isRequired,
-  openTravelOrderDetails: PropTypes.func.isRequired
 };
