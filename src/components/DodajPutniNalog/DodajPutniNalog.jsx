@@ -10,14 +10,15 @@ export default function DodajPutniNalog() {
   const [Datum_odlaska, setDatumOdlaska] = useState("");
   const [Broj_dana, setBrojDana] = useState("");
   const [Zaposlenici, setZaposlenici] = useState([]);
+  const [NoviZaposlenici, setNoviZaposlenici] = useState([]);
   const [Odobreno, setOdobreno] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/read.php");
+        const response = await axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/create.php");
         const zaposlenici = response.data;
-        setZaposlenici(zaposlenici);
+        setZaposlenici(Object.values(zaposlenici));
       } catch (err) {
         console.log(err);
       }
@@ -35,13 +36,15 @@ export default function DodajPutniNalog() {
         "svrha": Svrha,
         "datum_odlaska": Datum_odlaska,
         "broj_dana": Broj_dana,
-        "zaposlenici": Zaposlenici,
+        "zaposlenici": NoviZaposlenici,
         "odobreno": Odobreno
       });
+
+      console.log(response)
     } catch (err) {
       console.log(err);
     }
-  }
+  } 
 
   return (
     <>
@@ -75,9 +78,9 @@ export default function DodajPutniNalog() {
           </div>
           <div className='form-group mt-2'>
           <label>Odaberite Zaposlenike:</label>
-          <select multiple className='form-control' value={Zaposlenici} onChange={(e) => setZaposlenici(Array.from(e.target.selectedOptions, option => option.value))}>
-            {Zaposlenici.length > 0 && Zaposlenici.map((zaposlenik) => (
-              <option key={zaposlenik.sifraZaposlenika} value={zaposlenik.sifraZaposlenika}>
+          <select multiple className='form-control' onChange={(e) => setNoviZaposlenici(Array.from(e.target.selectedOptions, option => option.value))}>
+            {Zaposlenici.length > 0 && Zaposlenici.map((zaposlenik, i) => (
+              <option key={i} value={zaposlenik.sifraZaposlenika}>
                 {zaposlenik.ime} {zaposlenik.prezime}
               </option>
             ))}

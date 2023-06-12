@@ -43,59 +43,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     exit();
 } else if($_SERVER['REQUEST_METHOD'] === 'GET') {
     $sQuery = "SELECT * FROM putninalog";
-$oRecord = $oConnection->query($sQuery);
-$oPutniNalozi = array();
-while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
-{
-    $rbr = $oRow['r.br.'];
-    $polaziste = $oRow['polaziste'];
-    $odrediste = $oRow['odrediste'];
-    $svrha = $oRow['svrha'];
-    $datum_odlaska = $oRow['datum_odlaska'];
-    $broj_dana = $oRow['broj_dana'];
-    $odobreno = $oRow['odobreno'];
+    $oRecord = $oConnection->query($sQuery);
+    $oPutniNalozi = array();
+    while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
+    {
+        $rbr = $oRow['r.br.'];
+        $polaziste = $oRow['polaziste'];
+        $odrediste = $oRow['odrediste'];
+        $svrha = $oRow['svrha'];
+        $datum_odlaska = $oRow['datum_odlaska'];
+        $broj_dana = $oRow['broj_dana'];
+        $odobreno = $oRow['odobreno'];
 
-    $oPutniNalog = new PutniNalog($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno);
-    $oPutniNalozi[$rbr] = $oPutniNalog;
-}
+        $oPutniNalog = new PutniNalog($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno);
+        $oPutniNalozi[$rbr] = $oPutniNalog;
+    }
 
-$sQuery = "SELECT * FROM osoba";
-$oRecord = $oConnection->query($sQuery);
-$oOsobe = array();
+    $sQuery = "SELECT * FROM osoba";
+    $oRecord = $oConnection->query($sQuery);
+    $oOsobe = array();
 
-while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
-{
-    $sifraOsobe = $oRow['sifra'];
-    $ime = $oRow['ime'];
-    $prezime = $oRow['prezime'];
-    $godiste = $oRow['godiste'];
+    while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
+    {
+        $sifraOsobe = $oRow['sifra'];
+        $ime = $oRow['ime'];
+        $prezime = $oRow['prezime'];
+        $godiste = $oRow['godiste'];
 
-    $oOsobe[$sifraOsobe] = new Osoba ($ime, $prezime, $godiste);
-}
+        $oOsobe[$sifraOsobe] = new Osoba ($ime, $prezime, $godiste);
+    }
 
-$sQuery = "SELECT * FROM zaposlenik";
-$oRecord = $oConnection->query($sQuery);
-$oZaposlenici = array();
+    $sQuery = "SELECT * FROM zaposlenik";
+    $oRecord = $oConnection->query($sQuery);
+    $oZaposlenici = array();
 
-while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
-{
-    $sifraZaposlenika = $oRow['sifra'];
-    $sifraOsobe = $oRow['sifra_osobe'];
+    while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
+    {
+        $sifraZaposlenika = $oRow['sifra'];
+        $sifraOsobe = $oRow['sifra_osobe'];
 
-    $oZaposlenici[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika);
-}
+        $oZaposlenici[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika);
+    }
 
-$sQuery = "SELECT * FROM zaposlenici_nalog";
-$oRecord = $oConnection->query($sQuery);
+    $sQuery = "SELECT * FROM zaposlenici_nalog";
+    $oRecord = $oConnection->query($sQuery);
 
-while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
-{
-    $sifraZaposlenika = $oRow['sifraZaposlenika'];
-    $rbrNalog = $oRow['rbrNaloga'];
+    while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
+    {
+        $sifraZaposlenika = $oRow['sifraZaposlenika'];
+        $rbrNalog = $oRow['rbrNaloga'];
 
-    $oPutniNalozi[$rbrNalog]-> dodajZaposlenika($oZaposlenici [$sifraZaposlenika]); 
-}
+        $oPutniNalozi[$rbrNalog]-> dodajZaposlenika($oZaposlenici [$sifraZaposlenika]); 
+    }
 
-echo json_encode($oPutniNalozi);
+    echo json_encode($oPutniNalozi);
 }
 

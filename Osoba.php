@@ -2,9 +2,9 @@
 
 class Osoba 
 {
-    protected $ime;
-    protected $prezime;
-    protected $godiste;
+    public $ime;
+    public $prezime;
+    public $godiste;
     
     public function __construct($ime, $prezime, $godiste) 
     {
@@ -31,7 +31,7 @@ class Osoba
 
 class Zaposlenik extends Osoba 
 {
-    protected $sifraZaposlenika;
+    public $sifraZaposlenika;
     
     public function __construct($ime, $prezime, $godiste, $sifraZaposlenika) 
     {
