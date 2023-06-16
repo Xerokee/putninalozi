@@ -12,6 +12,7 @@ export default function NavigationJSX(){
             <div className="navbar-nav">
               <a className="nav-link" href="http://localhost:5173/">Home</a>
               <a className="nav-link" href="./dodaj">Dodaj</a>
+              <a className="nav-link" href="./zaposelnici">Zaposelnici</a>
             </div>
           </div>
         </nav>

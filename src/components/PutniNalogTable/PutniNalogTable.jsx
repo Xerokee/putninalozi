@@ -50,6 +50,7 @@ export default function ParentComponent() {
       return item;
     });
     setPost(updatedPosts);
+    setFilteredPosts(updatedPosts);
   };
 
   const Brisanje = (rbr) => {
