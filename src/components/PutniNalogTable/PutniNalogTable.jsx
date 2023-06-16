@@ -8,12 +8,15 @@ import { Link } from "react-router-dom";
 export default function ParentComponent() {
   const [post, setPost] = useState(null);
   const [zaposlenici, setZaposlenici] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredPosts, setFilteredPosts] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php")
       .then((res) => {
         const dataArray = Object.values(res.data);
         setPost(dataArray);
+        setFilteredPosts(dataArray);
       })
       .catch((error) => {
         console.log(error);
@@ -61,13 +64,32 @@ export default function ParentComponent() {
       });
     const updatedPosts = post.filter((item) => item.rbr !== rbr);
     setPost(updatedPosts);
+    setFilteredPosts(updatedPosts);
+  };
+
+  const handleSearch = () => {
+    const filtered = post.filter((item) => {
+      const fullName = `${item.ime} ${item.prezime}`;
+      return fullName.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+    setFilteredPosts(filtered);
   };
 
   return (
     <div>
       <h1>Putni Nalog Table</h1>
+      <div style={searchContainerStyle}>
+        <input
+          type="text"
+          placeholder="Pretraži po dijelu imena/prezimena korisnika..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={searchInputStyle}
+        />
+        <button style={searchButtonStyle} onClick={handleSearch}>Search</button>
+      </div>
       <PutniNalogTable
-        post={post}
+        post={filteredPosts}
         setPost={setPost}
         Odobrenje={Odobrenje}
         Brisanje={Brisanje}
@@ -77,14 +99,12 @@ export default function ParentComponent() {
   );
 }
 
-
 export function PutniNalogTable({
   post,
   setPost,
   Odobrenje,
   Brisanje,
 }) {
-
   useEffect(() => {
     axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php")
       .then((res) => {
@@ -154,4 +174,26 @@ PutniNalogTable.propTypes = {
   setPost: PropTypes.func,
   Odobrenje: PropTypes.func.isRequired,
   Brisanje: PropTypes.func.isRequired,
+};
+
+const searchContainerStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  marginRight: '69rem'
+};
+
+const searchInputStyle = {
+  width: '400px',
+  padding: '0.5rem',
+  border: '1px solid #ccc',
+};
+
+const searchButtonStyle = {
+  marginLeft: '0.5rem',
+  padding: '0.5rem 1rem',
+  backgroundColor: '#007bff',
+  color: '#fff',
+  border: 'none',
+  cursor: 'pointer',
 };

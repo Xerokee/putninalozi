@@ -28,7 +28,7 @@ const PregledPutniNalog = () => {
             <h1>Broj dana: {nalog.broj_dana}</h1>
             <h1>Zaposlenici: {Array(nalog.zaposlenici).join(" , ")}</h1>
             <h1>Odobreno: {nalog.odobreno ? 'Odobreno je' : 'Nije Odobreno'}</h1>
-            </div>}
+          </div>}
     </div>
   );
 };
