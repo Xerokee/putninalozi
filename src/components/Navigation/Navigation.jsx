@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
 export default function NavigationJSX(){
         return(
@@ -10,9 +11,9 @@ export default function NavigationJSX(){
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a className="nav-link" href="http://localhost:5173/">Home</a>
-              <a className="nav-link" href="./dodaj">Dodaj</a>
-              <a className="nav-link" href="./zaposelnici">Zaposelnici</a>
+              <Link className="nav-link" to={"/"}>Home</Link>
+              <Link className="nav-link" to={"/dodaj"}>Dodaj</Link>
+              <Link className="nav-link" to={"/zaposelnici"}>Zaposelnici</Link>
             </div>
           </div>
         </nav>

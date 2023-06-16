@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { saveAs } from 'file-saver';
+import NavigationJSX from "../Navigation/Navigation";
 
 const PregledPutniNalog = () => {
     const { id } = useParams()
@@ -90,9 +91,10 @@ const PregledPutniNalog = () => {
     }
 
   return (
-    <div>
+    <>
+        <NavigationJSX/>
         {nalog &&
-         <div>
+         <>
             <h1>Redni Broj: {nalog.rbr}</h1>
             <h1>Polazište: {nalog.polaziste}</h1>
             <h1>Odredište: {nalog.odrediste}</h1>
@@ -104,9 +106,9 @@ const PregledPutniNalog = () => {
             })}
             <h1>Odobreno: {nalog.odobreno ? 'Odobreno je' : 'Nije Odobreno'}</h1>
             <button onClick={onPrint}>Print</button>
-          </div>
+          </>
         }
-    </div>
+    </>
   );
 };
 
