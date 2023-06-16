@@ -81,7 +81,7 @@ export default function ParentComponent() {
 
   return (
     <div>
-      <h1>Putni Nalog Table</h1>
+      <h1>Putni Nalog Tablica</h1>
       <div style={searchContainerStyle}>
         <input
           type="text"
@@ -90,7 +90,7 @@ export default function ParentComponent() {
           onChange={(e) => setSearchQuery(e.target.value)}
           style={searchInputStyle}
         />
-        <button style={searchButtonStyle} onClick={handleSearch}>Search</button>
+        <button style={searchButtonStyle} onClick={handleSearch}>Pretraži</button>
       </div>
       <PutniNalogTable
         post={filteredPosts}

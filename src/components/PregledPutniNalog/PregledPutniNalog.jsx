@@ -31,53 +31,74 @@ const PregledPutniNalog = () => {
 
       // Set the font and font size for the text
       page.setFont(helveticaFont);
-      page.setFontSize(16);
+      page.setFontSize(30);
 
       // Add some text to the page
+      let redniBrojX = 220
+      let redniBrojY = 600
       page.drawText(`Redni broj: ${nalog.rbr}`, {
-        x: 30,
-        y: 800
+        x: redniBrojX,
+        y: redniBrojY,
       });
 
+      let polazisteX = 180
+      let polazisteY = 560
       page.drawText(`Polazište: ${nalog.polaziste}`, {
-        x: 30,
-        y: 780
+        x: polazisteX,
+        y: polazisteY,
       });
 
+      let odredisteX = 180
+      let odredisteY = 520
+      page.drawText(`Odredište: ${nalog.odrediste}`, {
+        x: odredisteX,
+        y: odredisteY,
+      });
+
+      let svrhaX = 70
+      let svrhaY = 480
       page.drawText(`Svrha: ${nalog.svrha}`, {
-        x: 30,
-        y: 760
+        x: svrhaX,
+        y: svrhaY,
       });
 
+      let datumOdlaskaX = 120
+      let datumOdlaskaY = 440
       page.drawText(`Datum odlaska: ${nalog.datum_odlaska}`, {
-        x: 30,
-        y: 740
+        x: datumOdlaskaX,
+        y: datumOdlaskaY,
       });
 
+      let brojDanaX = 230
+      let brojDanaY = 400
       page.drawText(`Broj dana: ${nalog.broj_dana}`, {
-        x: 30,
-        y: 720
+        x: brojDanaX,
+        y: brojDanaY,
       });
 
+      let zaposleniciX = 230
+      let zaposleniciY = 360
       page.drawText(`Zaposlenici:`, {
-        x: 30,
-        y: 700
+        x: zaposleniciX,
+        y: zaposleniciY,
       });
 
-      let zaposlenikY = 680
-
+      let zaposlenikX = 230
+      let zaposlenikY = 320
       nalog.zaposlenici.forEach((zaposlenik) => {
         page.drawText(`${zaposlenik.ime} ${zaposlenik.prezime}`, {
-          x: 30,
-          y: zaposlenikY
+          x: zaposlenikX,
+          y: zaposlenikY,
         });
 
-        zaposlenikY -= 20
+        zaposlenikY -= 40
       })
 
+      let odobrenoX = 140
+      let odobrenoY = 210
       page.drawText(`Odobreno: ${nalog.odobreno ? 'Odobreno je' : 'Nije Odobreno'}`, {
-        x: 30,
-        y: 600
+        x: odobrenoX,
+        y: odobrenoY,
       });
 
       // Serialize the PDF document to bytes
@@ -87,7 +108,7 @@ const PregledPutniNalog = () => {
       const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
 
       // Save the PDF Blob as a file with the name "document.pdf"
-      saveAs(pdfBlob, `radni-nalog-${nalog.rbr}.pdf`);
+      saveAs(pdfBlob, `putni-nalog-${nalog.rbr}.pdf`);
     }
 
   return (

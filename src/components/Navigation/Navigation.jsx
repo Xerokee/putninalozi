@@ -11,9 +11,9 @@ export default function NavigationJSX(){
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <Link className="nav-link" to={"/"}>Home</Link>
+              <Link className="nav-link" to={"/"}>Početna</Link>
               <Link className="nav-link" to={"/dodaj"}>Dodaj</Link>
-              <Link className="nav-link" to={"/zaposelnici"}>Zaposelnici</Link>
+              <Link className="nav-link" to={"/zaposlenici"}>Zaposlenici</Link>
             </div>
           </div>
         </nav>

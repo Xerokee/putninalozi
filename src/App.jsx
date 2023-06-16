@@ -12,7 +12,7 @@ function App() {
     <Routes>
       <Route path='/' element={<PutniNalogTable/>}/>
       <Route path='/dodaj' element={<DodajPutniNalog/>}/>
-      <Route path='/zaposelnici' element={<ZaposleniciTable/>}/>
+      <Route path='/zaposlenici' element={<ZaposleniciTable/>}/>
       <Route path='/nalog/:id' element={<PregledPutniNalog/>}/>
     </Routes>
     </BrowserRouter>

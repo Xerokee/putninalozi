@@ -18,7 +18,7 @@ export function ZaposleniciTable() {
 
   return (
     <>
-      <h1>Zapolsenici Table</h1>
+      <h1>Zaposlenici Tablica</h1>
       <NavigationJSX/>
       <div className="h-100 d-flex align-items-center justify-content-center">
         <table className="table">
