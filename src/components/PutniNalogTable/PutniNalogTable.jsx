@@ -69,9 +69,12 @@ export default function ParentComponent() {
 
   const handleSearch = () => {
     const filtered = post.filter((item) => {
-      const fullName = `${item.ime} ${item.prezime}`;
-      return fullName.toLowerCase().includes(searchQuery.toLowerCase());
-    });
+      const zaposlenici = item.zaposlenici_imena.filter((zaposlenik) => 
+        zaposlenik.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      return zaposlenici.length
+    })
+
     setFilteredPosts(filtered);
   };
 

@@ -42,10 +42,17 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     $ids = implode(",", $oZaposlenici); // Convert the array to a comma-separated string
+    $ids = array_map('intval', explode(',', $ids));
 
-    $sQuery = "SELECT * FROM zaposlenik WHERE `sifra` IN (:ids)"; // SQL with parameters
+    $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+    $sQuery = "SELECT * FROM zaposlenik WHERE sifra IN ($placeholders)"; // SQL with parameters
     $oRecord = $oConnection->prepare($sQuery); 
-    $oRecord->bindParam(":ids", $ids);
+
+    foreach ($ids as $index => $id) {
+        $oRecord->bindValue($index + 1, $id, PDO::PARAM_INT);
+    }
+
     $oRecord->execute();
 
     $sifreOsoba = array();
@@ -57,10 +64,16 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     $ids = implode(",", $sifreOsoba); // Convert the array to a comma-separated string
+    $ids = array_map('intval', explode(',', $ids));
+    $placeholders = implode(',', array_fill(0, count($ids), '?'));
 
-    $sQuery = "SELECT * FROM osoba WHERE `sifra` IN (:ids)"; // SQL with parameters
+    $sQuery = "SELECT * FROM osoba WHERE sifra IN ($placeholders)"; // SQL with parameters
     $oRecord = $oConnection->prepare($sQuery); 
-    $oRecord->bindParam(":ids", $ids);
+
+    foreach ($ids as $index => $id) {
+        $oRecord->bindValue($index + 1, $id, PDO::PARAM_INT);
+    }
+
     $oRecord->execute();
 
     $oOsobe = array();
