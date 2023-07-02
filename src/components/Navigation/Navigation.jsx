@@ -14,6 +14,7 @@ export default function NavigationJSX(){
               <Link className="nav-link" to={"/"}>Početna</Link>
               <Link className="nav-link" to={"/dodaj"}>Dodaj</Link>
               <Link className="nav-link" to={"/zaposlenici"}>Zaposlenici</Link>
+              <Link className="nav-link" to={"/dodajzaposlenika"}>Dodaj Zaposlenika</Link>
             </div>
           </div>
         </nav>
