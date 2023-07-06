@@ -126,7 +126,7 @@ const PregledPutniNalog = () => {
               return <h1 key={i}>{zaposlenik.ime} {zaposlenik.prezime}</h1>
             })}
             <h1>Odobreno: {nalog.odobreno ? 'Odobreno je' : 'Nije Odobreno'}</h1>
-            <button onClick={onPrint}>Print</button>
+            <button onClick={onPrint}>Ispis</button>
           </>
         }
     </>
