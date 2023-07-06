@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationJSX from '../Navigation/Navigation';
+import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function DodajPutniNalog() {
   const [Polaziste, setPolaziste] = useState("");
@@ -12,6 +14,7 @@ export default function DodajPutniNalog() {
   const [Zaposlenici, setZaposlenici] = useState([]);
   const [NoviZaposlenici, setNoviZaposlenici] = useState([]);
   const [Odobreno, setOdobreno] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +33,17 @@ export default function DodajPutniNalog() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/create.php", {
+      if (
+        !Polaziste ||
+        !Odrediste ||
+        !Svrha ||
+        !Datum_odlaska ||
+        !Broj_dana
+      ) {
+        throw new Error('Greška: Neispravan format podataka')
+      }
+
+      await axios.post("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/create.php", {
         "polaziste": Polaziste,
         "odrediste": Odrediste,
         "svrha": Svrha,
@@ -40,11 +53,15 @@ export default function DodajPutniNalog() {
         "odobreno": Odobreno
       });
 
-      console.log(response)
+      toast.success('Uspješno ste kreirali novi putni nalog');
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
     } catch (err) {
       console.log(err);
+      toast.error('Greška prilikom kreiranja');
     }
-  } 
+  }
 
   return (
     <>
@@ -95,6 +112,7 @@ export default function DodajPutniNalog() {
           </div>
         </form>
       </div>
+      <Toaster />
     </>
   );
 }

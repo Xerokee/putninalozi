@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $prezime = $oRow['prezime'];
       $godiste = $oRow['godiste'];
 
-      $oOsobe[$sifraOsobe] = new Osoba ($ime, $prezime, $godiste);
+      $oOsobe[$sifraOsobe] = new Osoba ($sifraOsobe, $ime, $prezime, $godiste);
   }
 
   $sQuery = "SELECT * FROM zaposlenik";
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $sifraZaposlenika = $oRow['sifra'];
       $sifraOsobe = $oRow['sifra_osobe'];
 
-      $data[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika);
+      $data[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika);
   }
 
   echo json_encode($data);

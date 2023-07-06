@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationJSX from '../Navigation/Navigation';
 
-export function DodajZaposlenika({ onAdd }) {
+export function DodajZaposlenika() {
   const [ime, setIme] = useState('');
   const [prezime, setPrezime] = useState('');
   const [godiste, setGodiste] = useState('');
@@ -13,16 +13,13 @@ export function DodajZaposlenika({ onAdd }) {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/create.php', {
+      const response = await axios.post('http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/zaposlenici.php', {
         ime,
         prezime,
         godiste,
       });
 
-      const newEmployee = response.data;
-
-      onAdd(newEmployee);
-
+      console.log(response)
       setIme('');
       setPrezime('');
       setGodiste('');

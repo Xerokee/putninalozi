@@ -85,7 +85,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
         $prezime = $oRow['prezime'];
         $godiste = $oRow['godiste'];
 
-        array_push($oOsobe, new Osoba ($ime, $prezime, $godiste));
+        array_push($oOsobe, new Osoba ($sifraOsobe, $ime, $prezime, $godiste));
     }
 
     $oPutniNalog->zaposlenici = $oOsobe;

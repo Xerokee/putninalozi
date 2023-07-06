@@ -95,7 +95,7 @@ const PregledPutniNalog = () => {
       })
 
       let odobrenoX = 140
-      let odobrenoY = 210
+      let odobrenoY = 200
       page.drawText(`Odobreno: ${nalog.odobreno ? 'Odobreno je' : 'Nije Odobreno'}`, {
         x: odobrenoX,
         y: odobrenoY,

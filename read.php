@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         $prezime = $oRow['prezime'];
         $godiste = $oRow['godiste'];
 
-        $oOsobe[$sifraOsobe] = new Osoba ($ime, $prezime, $godiste);
+        $oOsobe[$sifraOsobe] = new Osoba ($sifraOsobe, $ime, $prezime, $godiste);
     }
 
     $sQuery = "SELECT * FROM zaposlenik";
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         $sifraZaposlenika = $oRow['sifra'];
         $sifraOsobe = $oRow['sifra_osobe'];
 
-        $oZaposlenici[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika);
+        $oZaposlenici[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika);
     }
 
     $sQuery = "SELECT * FROM zaposlenici_nalog";

@@ -28,6 +28,16 @@ export function ZaposleniciTable() {
   const handleSave = (updatedEmployee) => {
     const updatedZaposlenici = [...zaposlenici];
     updatedZaposlenici[editedEmployeeIndex] = updatedEmployee;
+
+    axios
+      .put(`http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/zaposlenici.php`, updatedEmployee)
+      .then(() => {
+        console.log('Podaci zaposlenika su ažurirani!');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     setZaposlenici(updatedZaposlenici);
     setEditedEmployee(null);
     setEditedEmployeeIndex(null);
