@@ -3,30 +3,41 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationJSX from '../Navigation/Navigation';
+import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 export function DodajZaposlenika() {
   const [ime, setIme] = useState('');
   const [prezime, setPrezime] = useState('');
   const [godiste, setGodiste] = useState('');
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await axios.post('http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/zaposlenici.php', {
-        ime,
-        prezime,
-        godiste,
+      if (
+        !ime ||
+        !prezime ||
+        !godiste
+      ) {
+        throw new Error('Greška: Neispravan format podataka')
+      }
+
+      await axios.post('http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/zaposlenici.php', {
+        "ime": ime,
+        "prezime": prezime,
+        "godiste": godiste,
       });
 
-      console.log(response)
-      setIme('');
-      setPrezime('');
-      setGodiste('');
-    } catch (error) {
-      console.log(error);
+      toast.success('Uspješno ste kreirali novog zaposlenika');
+      setTimeout(() => {
+        navigate('/zaposlenici')
+      }, 2000)
+    } catch (err) {
+      console.log(err);
+      toast.error('Greška prilikom dodavanja zaposlenika');
     }
-  };
+  }
 
   return (
     <>
@@ -50,6 +61,7 @@ export function DodajZaposlenika() {
           </div>
         </form>
       </div>
+      <Toaster />
     </>
   );
 }

@@ -12,7 +12,7 @@ export default function NavigationJSX(){
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <Link className="nav-link" to={"/"}>Početna</Link>
-              <Link className="nav-link" to={"/dodaj"}>Dodaj</Link>
+              <Link className="nav-link" to={"/dodaj"}>Dodaj Nalog</Link>
               <Link className="nav-link" to={"/zaposlenici"}>Zaposlenici</Link>
               <Link className="nav-link" to={"/dodajzaposlenika"}>Dodaj Zaposlenika</Link>
             </div>

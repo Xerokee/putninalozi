@@ -59,7 +59,7 @@ export default function DodajPutniNalog() {
       }, 2000)
     } catch (err) {
       console.log(err);
-      toast.error('Greška prilikom kreiranja');
+      toast.error('Greška prilikom dodavanja naloga');
     }
   }
 
