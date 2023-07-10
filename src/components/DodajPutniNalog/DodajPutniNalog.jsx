@@ -103,9 +103,9 @@ export default function DodajPutniNalog() {
             ))}
           </select>
         </div>
-          <div className='form-group mt-2'>
+          <div className='form-group mt-2' style={{ alignItems: 'center' }}>
             <label>Odobreno:</label>
-            <input type="checkbox" checked={Odobreno} onChange={(e) => setOdobreno(e.target.checked)} />
+            <input type="checkbox" style={{ marginLeft: '10px', transform: 'scale(1.5)', backgroundColor: 'blue' }} checked={Odobreno} onChange={(e) => setOdobreno(e.target.checked)} />
           </div>
           <div className='text-center'>
             <input className="btn btn-primary mt-2" type="submit" />

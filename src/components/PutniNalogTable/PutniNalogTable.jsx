@@ -184,7 +184,7 @@ const searchContainerStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  marginRight: '69rem'
+  marginRight: '67rem'
 };
 
 const searchInputStyle = {
