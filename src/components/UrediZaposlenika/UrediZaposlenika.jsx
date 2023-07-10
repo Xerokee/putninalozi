@@ -41,9 +41,13 @@ export function UrediZaposlenika({ zaposlenik, onSave, onCancel }) {
         value={editedEmployee.godiste || ''}
         onChange={handleChange}
       />
-      <button onClick={handleSave}>Spremi</button>
+      <div style={{ marginTop: '1rem' }}>
+        <button style={{ marginRight: '0.5rem' }} onClick={handleSave}>
+          Spremi
+        </button>
       <button onClick={handleCancel}>Odustani</button>
     </div>
+  </div>
   );
 }
 
