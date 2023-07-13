@@ -14,10 +14,10 @@ export default function NavigationJSX(){
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <Link className="nav-link" to={"/"}>Početna</Link>
-              <Link className="nav-link" to={"/dodaj"}>Dodaj Nalog</Link>
-              <Link className="nav-link" to={"/zaposlenici"}>Zaposlenici</Link>
-              <Link className="nav-link" to={"/dodajzaposlenika"}>Dodaj Zaposlenika</Link>
+              <Link className="nav-link" to={"/"} style={{ fontSize: 17 }}>Početna</Link>
+              <Link className="nav-link" to={"/dodaj"} style={{ fontSize: 17 }} >Dodaj Nalog</Link>
+              <Link className="nav-link" to={"/zaposlenici"} style={{ fontSize: 17 }}>Zaposlenici</Link>
+              <Link className="nav-link" to={"/dodajzaposlenika"} style={{ fontSize: 17 }}>Dodaj Zaposlenika</Link>
             </div>  
           </div>
         </nav>
