@@ -1,11 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import vuv_logo from '../Navigation/vuv_logo.png';
 
 export default function NavigationJSX(){
         return(
             <div className='mm'>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-center align-content-center">
-          <a className="navbar-brand" href="#">VUV putni nalozi</a>
+                <a className="navbar-brand" href="#">
+                  <img src={vuv_logo} alt="VUV putni nalozi" width="50" height="30" /> VUV putni nalozi
+                </a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -15,7 +18,7 @@ export default function NavigationJSX(){
               <Link className="nav-link" to={"/dodaj"}>Dodaj Nalog</Link>
               <Link className="nav-link" to={"/zaposlenici"}>Zaposlenici</Link>
               <Link className="nav-link" to={"/dodajzaposlenika"}>Dodaj Zaposlenika</Link>
-            </div>
+            </div>  
           </div>
         </nav>
             </div>
