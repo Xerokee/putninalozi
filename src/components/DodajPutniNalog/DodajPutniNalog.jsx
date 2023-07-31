@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationJSX from '../Navigation/Navigation';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function DodajPutniNalog() {
   const [Polaziste, setPolaziste] = useState("");
@@ -84,10 +86,16 @@ export default function DodajPutniNalog() {
             </label>
           </div>
           <div className='form-group mt-2'>
-            <label>Unesite Datum Odlaska:
-              <input className='form-control' type="text" value={Datum_odlaska} onChange={(e) => setDatumOdlaska(e.target.value)} />
-            </label>
-          </div>
+        <label>Unesite Datum Odlaska:</label>
+      </div>
+      <div className='form-group'>
+        <DatePicker
+          className='form-control'
+          selected={Datum_odlaska}
+          onChange={(date) => setDatumOdlaska(date)}
+          dateFormat="dd/MM/yyyy"
+        />
+        </div>
           <div className='form-group mt-2'>
             <label>Unesite Broj Dana:
               <input className='form-control' type="text" value={Broj_dana} onChange={(e) => setBrojDana(e.target.value)} />
