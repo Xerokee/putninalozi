@@ -98,6 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         $sifraZaposlenika = $oRow['sifraZaposlenika'];
         $rbrNalog = $oRow['rbrNaloga'];
 
+        $oZaposlenici[$sifraZaposlenika]->ime = $oRow['ime'];
+        $oZaposlenici[$sifraZaposlenika]->prezime = $oRow['prezime'];
+
         $oPutniNalozi[$rbrNalog]-> dodajZaposlenika($oZaposlenici [$sifraZaposlenika]); 
     }
 

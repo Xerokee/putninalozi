@@ -4,8 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationJSX from '../Navigation/Navigation';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import hr from 'date-fns/locale/hr';
+registerLocale('hr', hr)
 
 export default function DodajPutniNalog() {
   const [Polaziste, setPolaziste] = useState("");
@@ -92,6 +94,7 @@ export default function DodajPutniNalog() {
         <DatePicker
           className='form-control'
           selected={Datum_odlaska}
+          locale="hr"
           onChange={(date) => setDatumOdlaska(date)}
           dateFormat="dd/MM/yyyy"
         />
@@ -103,7 +106,7 @@ export default function DodajPutniNalog() {
           </div>
           <div className='form-group mt-2'>
           <label>Odaberite Zaposlenike:</label>
-          <select multiple className='form-control' onChange={(e) => setNoviZaposlenici(Array.from(e.target.selectedOptions, option => option.value))}>
+          <select multiple className='form-control' onChange={(e) => setNoviZaposlenici(Array.from(e.target.selectedOptions, option => ({id: option.value, zaposlenik: option.label})))}>
             {Zaposlenici.length > 0 && Zaposlenici.map((zaposlenik, i) => (
               <option key={i} value={zaposlenik.sifraZaposlenika}>
                 {zaposlenik.ime} {zaposlenik.prezime}

@@ -2,14 +2,48 @@ import axios from "axios";
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationJSX from "../Navigation/Navigation";
-import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import DataTable from 'react-data-table-component';
 
 export default function ParentComponent() {
   const [post, setPost] = useState(null);
-  const [zaposlenici, setZaposlenici] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredPosts, setFilteredPosts] = useState([]);
+  const [sortOrder, setSortOrder] = useState('asc');
+
+  const hrTranslations = {
+    pagination: {
+      rowsPerPageText: 'Redova po stranici:',
+      rangeSeparatorText: 'od',
+      noRowsPerPage: 'Nema redova po stranici',
+      selectAllRows: 'Odaberi sve redove',
+      selectAllRowsAria: 'Odaberi sve redove',
+      nextPage: 'Sljedeća stranica',
+      previousPage: 'Prethodna stranica',
+      noPagination: 'Nema paginacije',
+    },
+    toolbar: {
+      search: 'Pretraži',
+      downloadCsv: 'Preuzmi CSV',
+      print: 'Ispiši',
+      viewColumns: 'Vidi stupce',
+      filterTable: 'Filtriraj tablicu',
+    },
+    filter: {
+      all: 'Sve',
+      title: 'FILTERI',
+      reset: 'RESETIRAJ',
+    },
+    viewColumns: {
+      title: 'Vidi stupce',
+      titleAria: 'Vidi/Ne vidi stupce',
+    },
+    selectedRows: {
+      text: 'redova odabrano',
+      delete: 'Izbriši',
+      deleteAria: 'Izbriši odabrane redove',
+    },
+  };
 
   useEffect(() => {
     axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php")
@@ -17,15 +51,6 @@ export default function ParentComponent() {
         const dataArray = Object.values(res.data);
         setPost(dataArray);
         setFilteredPosts(dataArray);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-      axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php")
-      .then((res) => {
-        const zaposleniciArray = Object.values(res.data);
-        setZaposlenici(zaposleniciArray);
       })
       .catch((error) => {
         console.log(error);
@@ -70,13 +95,113 @@ export default function ParentComponent() {
 
   const handleSearch = () => {
     const filtered = post.filter((item) => {
-      const zaposlenici = item.zaposlenici_imena.filter((zaposlenik) => 
+      const zaposlenici = item.zaposlenici_imena.filter((zaposlenik) =>
         zaposlenik.toLowerCase().includes(searchQuery.toLowerCase())
       )
       return zaposlenici.length
     })
 
     setFilteredPosts(filtered);
+  };
+
+  const columns = [
+    {
+      cell: (row) => <Link to={{ pathname: `nalog/${row.rbr}` }}>Pregledaj</Link>,
+      width: '7%'
+    },
+    {
+      name: 'R.br.',
+      selector: row => row.rbr,
+      sortable: true,
+      width: '7%'
+    },
+    {
+      name: 'Polazište',
+      selector: row => row.polaziste,
+      sortable: true,
+      width: '9%'
+    },
+    {
+      name: 'Odredište',
+      selector: row => row.odrediste,
+      sortable: true,
+      width: '8%'
+    },
+    {
+      name: 'Svrha',
+      selector: row => row.svrha,
+      sortable: true,
+      width: '15%'
+    },
+    {
+      name: 'Datum Odlaska',
+      selector: row => row.datum_odlaska,
+      sortable: true,
+      width: '11%'
+    },
+    {
+      name: 'Broj dana',
+      selector: row => row.broj_dana,
+      sortable: true,
+      width: '8%'
+    },
+    {
+      name: 'Zaposlenici',
+      selector: row => row.zaposlenici_imena,
+      format: (row) => row.zaposlenici_imena.join(", "),
+      sortable: true,
+      width: '18%'
+    },
+    {
+      name: 'Odobreno',
+      selector: row => row.odobreno,
+      format: (row) => row.odobreno ? 'Odobreno je' : 'Nije Odobreno',
+      sortable: true,
+      width: '9%'
+    },
+    {
+      name: 'Odobrenje',
+      cell: (row) => <button onClick={() => Odobrenje(row.rbr)}>Odobri</button>,
+      width: '8%'
+    },
+    {
+      name: 'Brisanje',
+      cell: (row) => <button onClick={() => Brisanje(row.rbr)}>Obriši</button>,
+      width: '8%'
+    },
+  ];
+  
+  const handleSort = (column, sortDirection) => {
+    if (column.selector === 'rbr') {
+      setSortOrder(sortDirection === 'asc' ? 'desc' : 'asc');
+      const sortedPosts = [...filteredPosts].sort((a, b) => {
+        if (a.rbr === b.rbr) return 0;
+        return sortOrder === 'asc' ? a.rbr - b.rbr : b.rbr - a.rbr;
+      });
+      setFilteredPosts(sortedPosts);
+    } else {
+      setFilteredPosts([...filteredPosts].sort((a, b) => {
+        if (a[column.selector] === b[column.selector]) return 0;
+        return sortDirection === 'asc' ? a[column.selector].toString().localeCompare(b[column.selector]) : b[column.selector].toString().localeCompare(a[column.selector]);
+      }));
+    }
+  };
+
+  const newFontSize = '15px'; 
+  const newFontSizeElements = '15px';
+
+  const customStyles = {
+    headCells: {
+      style: {
+        fontSize: newFontSize,
+        fontWeight: 'bold'
+      },
+    },
+    cells: {
+      style: {
+        fontSize: newFontSizeElements,
+      },
+    },
   };
 
   return (
@@ -92,93 +217,32 @@ export default function ParentComponent() {
         />
         <button style={searchButtonStyle} onClick={handleSearch}>Pretraži</button>
       </div>
-      <PutniNalogTable
-        post={filteredPosts}
-        setPost={setPost}
-        Odobrenje={Odobrenje}
-        Brisanje={Brisanje}
-        zaposlenici={zaposlenici}
+
+      <NavigationJSX/>
+
+      <DataTable
+        data={filteredPosts}
+        columns={columns}
+        onSort={handleSort}
+        defaultSortField="rbr"
+        defaultSortAsc={true}
+        pagination
+        paginationComponentOptions={{
+          rowsPerPageText: hrTranslations.pagination.rowsPerPageText, // Use the translation here
+          rangeSeparatorText: hrTranslations.pagination.rangeSeparatorText,
+        }}
+        highlightOnHover
+        striped
+        customStyles={customStyles}
+        paginationPerPage={10} // Adjust as needed
+        paginationRowsPerPageOptions={[10, 20, 30]} // Adjust as needed
+        paginationRowsPerPageText="Redova po stranici:" // For the dropdown label
+        noDataComponent="Nema dostupnih podataka" // For no data message
+        text={hrTranslations} // Apply Croatian translations here
       />
     </div>
   );
 }
-
-export function PutniNalogTable({
-  post,
-  setPost,
-  Odobrenje,
-  Brisanje,
-}) {
-  useEffect(() => {
-    axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php")
-      .then((res) => {
-        const dataArray = Object.values(res.data);
-        setPost(dataArray);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [setPost]);
-
-  if (!post) return null;
-
-  return (
-    <>
-      <NavigationJSX/>
-      <div className="h-100 d-flex align-items-center justify-content-center">
-        <table className="table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>R.br.</th>
-              <th>Polazište</th>
-              <th>Odredište</th>
-              <th>Svrha</th>
-              <th>Datum odlaska</th>
-              <th>Broj dana</th>
-              <th>Zaposlenici</th>
-              <th>Odobreno</th>
-              <th>Odobrenje</th>
-              <th>Brisanje</th>
-            </tr>
-          </thead>
-          <tbody>
-            {post.map((item) => (
-              <tr key={item.rbr}>
-                <td>
-                  <Link to={{ pathname: `nalog/${item.rbr}` }}>
-                    Pregledaj
-                  </Link>
-                </td>
-                <td>{item.rbr}</td>
-                <td>{item.polaziste}</td>
-                <td>{item.odrediste}</td>
-                <td>{item.svrha}</td>
-                <td>{item.datum_odlaska}</td>
-                <td>{item.broj_dana}</td>
-                <td>{Array(item.zaposlenici_imena).join(" , ")}</td>
-                <td>{item.odobreno ? 'Odobreno je' : 'Nije Odobreno'}</td>
-                <td>
-                  <button onClick={() => Odobrenje(item.rbr)}>Odobri</button>
-                </td>
-                <td>
-                  <button onClick={() => Brisanje(item.rbr)}>Obriši</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
-}
-
-PutniNalogTable.propTypes = {
-  post: PropTypes.array,
-  setPost: PropTypes.func,
-  Odobrenje: PropTypes.func.isRequired,
-  Brisanje: PropTypes.func.isRequired,
-};
 
 const searchContainerStyle = {
   display: 'flex',

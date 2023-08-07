@@ -38,57 +38,13 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
     while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
     {
         $sifraZaposlenika = $oRow['sifraZaposlenika'];
-        array_push($oZaposlenici, intval($sifraZaposlenika));
-    }
-
-    $ids = implode(",", $oZaposlenici); // Convert the array to a comma-separated string
-    $ids = array_map('intval', explode(',', $ids));
-
-    $placeholders = implode(',', array_fill(0, count($ids), '?'));
-
-    $sQuery = "SELECT * FROM zaposlenik WHERE sifra IN ($placeholders)"; // SQL with parameters
-    $oRecord = $oConnection->prepare($sQuery); 
-
-    foreach ($ids as $index => $id) {
-        $oRecord->bindValue($index + 1, $id, PDO::PARAM_INT);
-    }
-
-    $oRecord->execute();
-
-    $sifreOsoba = array();
-
-    while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
-    {
-        $sifraOsobe = $oRow['sifra_osobe'];
-        array_push($sifreOsoba, $sifraOsobe);
-    }
-
-    $ids = implode(",", $sifreOsoba); // Convert the array to a comma-separated string
-    $ids = array_map('intval', explode(',', $ids));
-    $placeholders = implode(',', array_fill(0, count($ids), '?'));
-
-    $sQuery = "SELECT * FROM osoba WHERE sifra IN ($placeholders)"; // SQL with parameters
-    $oRecord = $oConnection->prepare($sQuery); 
-
-    foreach ($ids as $index => $id) {
-        $oRecord->bindValue($index + 1, $id, PDO::PARAM_INT);
-    }
-
-    $oRecord->execute();
-
-    $oOsobe = array();
-
-    while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
-    {
-        $sifraOsobe = $oRow['sifra'];
         $ime = $oRow['ime'];
         $prezime = $oRow['prezime'];
-        $godiste = $oRow['godiste'];
 
-        array_push($oOsobe, new Osoba ($sifraOsobe, $ime, $prezime, $godiste));
+        array_push($oZaposlenici, (object) ['ime' => $ime, 'prezime' => $prezime]);
     }
 
-    $oPutniNalog->zaposlenici = $oOsobe;
+    $oPutniNalog->zaposlenici = $oZaposlenici;
 
     echo json_encode($oPutniNalog);
 }

@@ -33,9 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $insertedId = $oConnection->lastInsertId();
 
         foreach ($zaposlenici as &$zaposlenik) {
-          $sQuery = "INSERT INTO zaposlenici_nalog (sifraZaposlenika, rbrNaloga) VALUES (?, ?)";
-            $oRecord = $oConnection->prepare($sQuery);
-            $result = $oRecord->execute([$zaposlenik, $insertedId]);      
+          $podaciZaposelnika = explode(" ", $zaposlenik['zaposlenik']);
+
+          $sQuery = "INSERT INTO zaposlenici_nalog (sifraZaposlenika, rbrNaloga, ime, prezime) VALUES (?, ?, ?, ?)";
+          $oRecord = $oConnection->prepare($sQuery);
+          $result = $oRecord->execute([intval($zaposlenik['id']), $insertedId, $podaciZaposelnika[0], $podaciZaposelnika[1]]);      
         }
       } else {
           // Handle the case where the query failed
@@ -47,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       die("Greška: Nije moguće izvršiti $sQuery. " . $pe->getMessage());
   }
 
-  echo json_encode($data);
+  // echo json_encode($data);
 
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $sQuery = "SELECT * FROM osoba";
