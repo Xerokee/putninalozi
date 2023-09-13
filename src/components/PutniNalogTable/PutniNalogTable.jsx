@@ -255,6 +255,7 @@ const searchInputStyle = {
   width: '400px',
   padding: '0.5rem',
   border: '1px solid #ccc',
+  fontWeight: '700'
 };
 
 const searchButtonStyle = {
