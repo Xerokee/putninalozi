@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { PDFDocument, StandardFonts } from 'pdf-lib';
+import { ColorTypes, PDFDocument, PDFFont, StandardFonts } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import NavigationJSX from "../Navigation/Navigation";
 
@@ -19,86 +19,1047 @@ const PregledPutniNalog = () => {
         });
     }, [id])
 
+    const addMargin = (page) => {
+      // Add some text to the page
+      page.drawText('________________________________________________________', {
+        x: 18,
+        y: 830,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 814,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 798,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 782,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 766,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 750,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 734,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 718,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 702,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 686,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 670,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 654,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 638,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 622,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 606,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 590,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 574,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 558,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 542,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 526,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 510,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 494,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 478,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 462,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 446,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 430,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 414,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 398,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 382,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 366,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 350,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 334,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 318,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 302,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 286,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 270,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 254,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 238,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 222,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 206,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 190,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 174,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 158,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 158,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 142,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 126,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 110,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 94,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 78,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 62,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 46,
+      });
+
+      page.drawText('|', {
+        x: 15,
+        y: 30,
+      });
+
+      page.drawText('________________________________________________________', {
+        x: 18,
+        y: 30,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 814,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 798,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 782,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 766,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 750,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 734,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 718,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 702,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 686,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 670,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 654,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 638,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 622,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 606,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 590,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 574,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 558,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 542,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 526,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 510,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 494,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 478,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 462,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 446,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 430,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 414,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 398,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 382,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 366,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 350,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 334,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 318,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 302,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 286,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 270,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 254,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 238,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 222,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 206,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 190,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 174,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 158,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 158,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 142,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 126,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 110,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 94,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 78,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 62,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 46,
+      });
+
+      page.drawText('|', {
+        x: 577,
+        y: 30,
+      });
+    }
+
     const onPrint = async () => {
       // Create a new PDF document
       const pdfDoc = await PDFDocument.create();
 
       // Add a new page to the document
-      const page = pdfDoc.addPage();
+      const page1 = pdfDoc.addPage();
+      const page2 = pdfDoc.addPage();
 
       // Get the standard font
       const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+      const helveticaBoldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);    
 
       // Set the font and font size for the text
-      page.setFont(helveticaFont);
-      page.setFontSize(30);
-
-      // Add some text to the page
-      let redniBrojX = 220
-      let redniBrojY = 600
-      page.drawText(`Redni broj: ${nalog.rbr}`, {
-        x: redniBrojX,
-        y: redniBrojY,
+      [page1, page2].forEach((page) => {
+        page.setFont(helveticaFont);
+        page.setFontSize(18);
+        addMargin(page)
       });
 
-      let polazisteX = 180
-      let polazisteY = 560
-      page.drawText(`Polazište: ${nalog.polaziste}`, {
-        x: polazisteX,
-        y: polazisteY,
+      page1.drawText('_________________', {
+        x: 50,
+        y: 800,
       });
 
-      let odredisteX = 180
-      let odredisteY = 520
-      page.drawText(`Odredište: ${nalog.odrediste}`, {
-        x: odredisteX,
-        y: odredisteY,
+      page1.drawText('(naziv pravne ili fizicke osobe)', {
+        x: 54,
+        y: 785,
+        size: 12.
       });
 
-      let svrhaX = 70
-      let svrhaY = 480
-      page.drawText(`Svrha: ${nalog.svrha}`, {
-        x: svrhaX,
-        y: svrhaY,
+      page1.drawText(nalog.rbr.toString(), {
+        x: 170,
+        y: 757,
+        size: 12
       });
 
-      let datumOdlaskaX = 120
-      let datumOdlaskaY = 440
-      page.drawText(`Datum odlaska: ${nalog.datum_odlaska}`, {
-        x: datumOdlaskaX,
-        y: datumOdlaskaY,
+      page1.drawText('Broj putnog naloga: _____', {
+        x: 50,
+        y: 757,
+        size: 12
       });
 
-      let brojDanaX = 230
-      let brojDanaY = 400
-      page.drawText(`Broj dana: ${nalog.broj_dana}`, {
-        x: brojDanaX,
-        y: brojDanaY,
+      page1.drawText('U __________________, dana __________ godine.', {
+        x: 280,
+        y: 757,
+        size: 12
       });
 
-      let zaposleniciX = 230
-      let zaposleniciY = 360
-      page.drawText(`Zaposlenici:`, {
-        x: zaposleniciX,
-        y: zaposleniciY,
+      page1.setFont(helveticaBoldFont); // Bold font      
+      page1.drawText('PUTNI NALOG', {
+        x: 230,
+        y: 680,
+      });
+      page1.setFont(helveticaFont);
+
+      page1.drawText('Kojima se odreduje da _______________________, OIB: ____________________', {
+        x: 50,
+        y: 600,
+        size: 12
       });
 
-      let zaposlenikX = 230
-      let zaposlenikY = 320
-      nalog.zaposlenici.forEach((zaposlenik) => {
-        page.drawText(`${zaposlenik.ime} ${zaposlenik.prezime}`, {
-          x: zaposlenikX,
-          y: zaposlenikY,
+      page1.drawText('(ime i prezime osobe koja putuje)', {
+        x: 163,
+        y: 586,
+        size: 12
+      });
+
+      page1.drawText(nalog.polaziste, {
+        x: 260,
+        y: 550,
+        size: 12
+      });
+
+      page1.drawText('na radnom mjestu: ___________________________________________________', {
+        x: 50,
+        y: 550,
+        size: 12
+      });
+
+      page1.drawText(nalog.broj_dana.toString(), {
+        x: 260,
+        y: 520,
+        size: 12
+      });
+
+      page1.drawText('sluzbeno otputuje dana: ______________________________________________', {
+        x: 50,
+        y: 520,
+        size: 12
+      });
+
+      page1.drawText(nalog.odrediste, {
+        x: 260,
+        y: 490,
+        size: 12
+      });
+
+      page1.drawText('na sluzbeno putovanje u: ______________________________________________', {
+        x: 50,
+        y: 490,
+        size: 12
+      });
+
+      page1.drawText('(mjesto u koje osoba putuje)', {
+        x: 250,
+        y: 476,
+        size: 12
+      });
+
+      page1.drawText(nalog.svrha, {
+        x: 260,
+        y: 450,
+        size: 12
+      });
+
+      page1.drawText('sa zadatkom: ________________________________________________________', {
+        x: 50,
+        y: 450,
+        size: 12
+      });
+
+      page1.drawText(nalog.broj_dana.toString(), {
+        x: 200,
+        y: 420,
+        size: 12
+      });
+
+      page1.drawText('Putovanje moze trajati: ________ dana (_________________________________)', {
+        x: 50,
+        y: 420,
+        size: 12
+      });
+
+      page1.drawText('(slovima)', {
+        x: 350,
+        y: 406,
+        size: 12
+      });
+
+      page1.drawText('Za Prijevoz se moze koristiti: _________________________________________,', {
+        x: 50,
+        y: 380,
+        size: 12
+      });
+
+      page1.drawText('marke: ____________________________, registracijskih oznaka: _________________', {
+        x: 50,
+        y: 350,
+        size: 12
+      });
+
+      page1.drawText('Za službeno putovanje odobrava se isplata predujma radi podmirenja putnih troškova u iznosu od:', {
+        x: 50,
+        y: 320,
+        size: 12
+      });
+
+      page1.drawText('____________________ kuna.', {
+        x: 50,
+        y: 300,
+        size: 12
+      });
+
+      page1.drawText('U roku ___________ dana od povratka sa sluzbenog putovanja potrebno je izvrsiti obracun ovog,', {
+        x: 50,
+        y: 280,
+        size: 12
+      });
+
+      page1.drawText('putovanja te u pisanom obliku predati izvjesce o obavljenom zadatku.', {
+        x: 50,
+        y: 260,
+        size: 12
+      });
+
+      page1.drawText('M.P.', {
+        x: 300,
+        y: 150,
+        size: 12
+      });
+
+      page1.drawText('______________________', {
+        x: 430,
+        y: 150,
+        size: 10
+      });
+
+      page1.drawText('Potpis ovlastene osobe', {
+        x: 430,
+        y: 130,
+        size: 12
+      });
+
+      page2.setFont(helveticaBoldFont); // Bold font      
+      page2.drawText('OBRACUN PUTNIH TROSKOVA', {
+        x: 150,
+        y: 770,
+      });
+      page2.setFont(helveticaFont);
+
+      page2.drawText(nalog.odrediste, {
+        x: 260,
+        y: 720,
+        size: 12
+      });
+
+      page2.drawText('Za obavljeno sluzbeno putovanje u: ______________________', {
+        x: 50,
+        y: 720,
+        size: 12
+      });
+
+      // Split the date string into an array [year, month, day]
+      const dateParts = nalog.datum_odlaska.split("-");
+
+      // Extract the year and day from the array
+      const year = dateParts[0];
+      const month = dateParts[1];
+      const day = dateParts[2];
+
+      page2.drawText(`${day}.${month}.${year}.`, {
+        x: 260,
+        y: 700,
+        size: 12
+      });
+
+      page2.drawText('Na putovanje sam krenuo/la dana: ______________________', {
+        x: 50,
+        y: 700,
+        size: 12
+      });
+
+      page2.drawText('Vratio/la sam se dana: ________________________________', {
+        x: 50,
+        y: 680,
+        size: 12
+      });
+
+      const table1StartX = 50;  // The table starts at x = 50
+      const table1StartY = page2.getHeight() - 200;  // The table starts at y = page height - 100
+
+      // Draw table1 on page2
+      page2.drawLine({
+        start: { x: table1StartX, y: table1StartY },
+        end: { x: table1StartX + 500, y: table1StartY },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX, y: table1StartY },
+        end: { x: table1StartX, y: table1StartY - 157 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX, y: 485 },
+        end: { x: table1StartX + 500, y: table1StartY - 157 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX + 500, y: table1StartY },
+        end: { x: table1StartX + 500, y: table1StartY - 157 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX, y: table1StartY - 20 },
+        end: { x: table1StartX + 500, y: table1StartY - 20 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX, y: table1StartY - 40 },
+        end: { x: table1StartX + 500, y: table1StartY - 40 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX, y: table1StartY - 60 },
+        end: { x: table1StartX + 500, y: table1StartY - 60 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX, y: table1StartY - 80 },
+        end: { x: table1StartX + 500, y: table1StartY - 80 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX, y: table1StartY - 100 },
+        end: { x: table1StartX + 500, y: table1StartY - 100 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX, y: table1StartY - 120 },
+        end: { x: table1StartX + 500, y: table1StartY - 120 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX, y: table1StartY - 140 },
+        end: { x: table1StartX + 500, y: table1StartY - 140 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX + 160, y: table1StartY - 157 },
+        end: { x: table1StartX + 160, y: table1StartY - 20 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX + 360, y: table1StartY - 157 },
+        end: { x: table1StartX + 360, y: table1StartY - 20 },
+        thickness: 1
+      });
+
+      page2.drawLine({
+        start: { x: table1StartX + 80, y: table1StartY - 140 },
+        end: { x: table1StartX + 80, y: table1StartY - 60 },
+        thickness: 1
+      });
+
+      page2.setFont(helveticaBoldFont); // Bold font      
+      page2.drawText("1. OBRACUN PRIJEVOZNIH TROSKOVA", {
+        x: table1StartX + 170,
+        y: table1StartY - 15,
+        size: 9
+      });
+      page2.setFont(helveticaFont);
+
+      page2.drawText("Pocetno stanje brojila ____________", {
+        x: table1StartX + 5,
+        y: table1StartY - 35,
+        size: 9
+      });
+
+      page2.drawText("Zavrsno stanje brojila __________________", {
+        x: table1StartX + 170,
+        y: table1StartY - 35,
+        size: 9
+      });
+
+      page2.drawText("RELACIJA", {
+        x: table1StartX + 60,
+        y: table1StartY - 55,
+        size: 9
+      });
+
+      page2.drawText("Prijedeni km", {
+        x: table1StartX + 240,
+        y: table1StartY - 55,
+        size: 9
+      });
+
+      page2.drawText("Svoza za prijevoz", {
+        x: table1StartX + 390,
+        y: table1StartY - 55,
+        size: 9
+      });
+
+      page2.drawText("Od", {
+        x: table1StartX + 35,
+        y: table1StartY - 75,
+        size: 9
+      });
+
+      page2.drawText("Od", {
+        x: table1StartX + 115,
+        y: table1StartY - 75,
+        size: 9
+      });
+
+      page2.setFont(helveticaBoldFont); // Bold font      
+      page2.drawText("Ukupno", {
+        x: table1StartX + 60,
+        y: table1StartY - 152,
+        size: 12
+      });
+      page2.setFont(helveticaFont);
+
+      // Draw table2 on page2
+      const table2StartX = 50;  // The table starts at x = 50
+      const table2StartY = page2.getHeight() - 400;  // The table starts at y = page height - 100
+      const table2rowHeight = 20;
+      const table2colWidth = 250;
+      const table2numRows = 9;
+      const table2numCols = 2;
+
+      // Draw horizontal lines
+      for (let i = 0; i <= table2numRows; i++) {
+        const y = table2StartY - i * table2rowHeight;
+        page2.drawLine({
+          start: { x: table2StartX, y: y },
+          end: { x: table2StartX + table2numCols * table2colWidth, y: y },
+          thickness: 1
         });
+      }
 
-        zaposlenikY -= 40
-      })
+      // Draw vertical lines
+      for (let i = 0; i <= table2numCols; i++) {
+        const x = table2StartX + i * table2colWidth;
 
-      let odobrenoX = 140
-      let odobrenoY = 200
-      page.drawText(`Odobreno: ${nalog.odobreno ? 'Odobreno je' : 'Nije Odobreno'}`, {
-        x: odobrenoX,
-        y: odobrenoY,
+        if (i === 1) {
+          page2.drawLine({
+            start: { x: x * 1.2, y: table2StartY },
+            end: { x: x * 1.2, y: table2StartY - table2numRows * table2rowHeight },
+            thickness: 1
+          });          
+        } else {
+          page2.drawLine({
+            start: { x: x, y: table2StartY },
+            end: { x: x, y: table2StartY - table2numRows * table2rowHeight },
+            thickness: 1
+          });
+        }
+      }
+
+      // Add table text
+      for (let row = 0; row < table2numRows; row++) {
+        for (let col = 0; col < table2numCols; col++) {
+          let x = table2StartX + col * table2colWidth + 5;  // Adding a 5-unit padding
+          let y = table2StartY - row * table2rowHeight - 15;  // Adjusting for text height within cell
+          let cellText = ''
+
+          if (row === 0 && col === 0) {
+            x = x + 80
+            page2.setFont(helveticaBoldFont); // Bold font
+            cellText = '2. OBRACUN OSTALIH TROSKOVA'
+          } else if (row === 0 && col === 1) {
+            x = x + 140
+            cellText = 'SVOTA'
+          } else if (row === 5 && col === 0) {
+            x = x + 80
+            cellText = 'UKUPNO OSTALI TROSKOVI'
+          } else if (row === 6 && col === 0) {
+            x = x + 30
+            cellText = '3. UKUPNO NASTALI TROSKOVI NA SLUZBENOM PUTU'
+          } else if (row === 7 && col === 0) {
+            x = x + 70
+            cellText = '4. Umanjenje za isplaceni predujam'
+          } else if (row === 8 && col === 0) {
+            x = x + 90
+            cellText = '5. Za isplatu-vracanje svote'
+          }
+
+          page2.drawText(cellText, {
+            x: x,
+            y: y,
+            size: 9
+          });
+          page2.setFont(helveticaFont);
+        }
+      }
+
+      page2.setFont(helveticaBoldFont); // Bold font
+      page2.drawText("6. IZVJESCE SA SLUZBENOG PUTA", {
+        x: 50,
+        y: 230,
+        size: 12
+      });
+      page2.setFont(helveticaFont);
+
+      page2.drawText("____________________________________________________________________", {
+        x: 50,
+        y: 200,
+        size: 9
+      });
+
+      page2.drawText("Potvrdujem da je sluzbeno putovanje prema ovom nalogu obavljeno te da se isplata moze obaviti.", {
+        x: 50,
+        y: 170,
+        size: 9
+      });
+
+      page2.drawText("U __________________, dana ____________________________.", {
+        x: 50,
+        y: 150,
+        size: 10
+      });
+
+      page2.drawText("___________________", {
+        x: 50,
+        y: 100,
+        size: 10
+      });
+
+      page2.drawText("Podnositelj obracuna", {
+        x: 60,
+        y: 80,
+        size: 9
+      });
+
+      page2.drawText("___________________", {
+        x: 240,
+        y: 100,
+        size: 10
+      });
+
+      page2.drawText("Pregldao likvidator", {
+        x: 250,
+        y: 80,
+        size: 9
+      });
+
+      page2.drawText("___________________", {
+        x: 440,
+        y: 100,
+        size: 10
+      });
+
+      page2.drawText("Nalogodavac isplate", {
+        x: 450,
+        y: 80,
+        size: 9
       });
 
       // Serialize the PDF document to bytes
