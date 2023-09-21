@@ -1,9 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ColorTypes, PDFDocument, PDFFont, StandardFonts } from 'pdf-lib';
+import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import NavigationJSX from "../Navigation/Navigation";
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import './PregledPutniNalog.css'
+import travel_wallpaper from '../../assets/travel_wallpaper.jpeg';
+
 
 const PregledPutniNalog = () => {
     const { id } = useParams()
@@ -543,6 +549,14 @@ const PregledPutniNalog = () => {
     }
 
     const onPrint = async () => {
+      // Split the date string into an array [year, month, day]
+      const dateParts = nalog.datum_odlaska.split("-");
+
+      // Extract the year and day from the array
+      const year = dateParts[0];
+      const month = dateParts[1];
+      const day = dateParts[2];
+      
       // Create a new PDF document
       const pdfDoc = await PDFDocument.create();
 
@@ -566,6 +580,14 @@ const PregledPutniNalog = () => {
         y: 800,
       });
 
+      const employeeNames = nalog.zaposlenici.map((employee) => `${employee.ime} ${employee.prezime}`).join(', ');
+
+      page1.drawText(employeeNames, {
+        x: 50,
+        y: 800,
+        size: 12
+      });
+
       page1.drawText('(naziv pravne ili fizicke osobe)', {
         x: 54,
         y: 785,
@@ -580,6 +602,12 @@ const PregledPutniNalog = () => {
 
       page1.drawText('Broj putnog naloga: _____', {
         x: 50,
+        y: 757,
+        size: 12
+      });
+
+      page1.drawText(`${month} mjesecu                       ${day}. ${year}`, {
+        x: 317,
         y: 757,
         size: 12
       });
@@ -621,13 +649,13 @@ const PregledPutniNalog = () => {
         size: 12
       });
 
-      page1.drawText(nalog.broj_dana.toString(), {
+      page1.drawText(`${day}.${month}.${year}`, {
         x: 260,
         y: 520,
         size: 12
       });
 
-      page1.drawText('sluzbeno otputuje dana: ______________________________________________', {
+      page1.drawText('službeno otputuje dana: ______________________________________________', {
         x: 50,
         y: 520,
         size: 12
@@ -639,7 +667,7 @@ const PregledPutniNalog = () => {
         size: 12
       });
 
-      page1.drawText('na sluzbeno putovanje u: ______________________________________________', {
+      page1.drawText('na službeno putovanje u: ______________________________________________', {
         x: 50,
         y: 490,
         size: 12
@@ -669,7 +697,7 @@ const PregledPutniNalog = () => {
         size: 12
       });
 
-      page1.drawText('Putovanje moze trajati: ________ dana (_________________________________)', {
+      page1.drawText('Putovanje može trajati: ________ dana (_________________________________)', {
         x: 50,
         y: 420,
         size: 12
@@ -705,9 +733,15 @@ const PregledPutniNalog = () => {
         size: 12
       });
 
-      page1.drawText('U roku ___________ dana od povratka sa sluzbenog putovanja potrebno je izvrsiti obracun ovog,', {
-        x: 50,
+      page1.drawText(nalog.broj_dana.toString(), {
+        x: 115,
         y: 280,
+        size: 12
+      });
+
+      page1.drawText('U roku ___________ dana od povratka sa službenog putovanja potrebno je izvršiti obracun ovog,', {
+        x: 50,
+        y: 280, 
         size: 12
       });
 
@@ -729,14 +763,14 @@ const PregledPutniNalog = () => {
         size: 10
       });
 
-      page1.drawText('Potpis ovlastene osobe', {
+      page1.drawText('Potpis ovlaštene osobe', {
         x: 430,
         y: 130,
         size: 12
       });
 
       page2.setFont(helveticaBoldFont); // Bold font      
-      page2.drawText('OBRACUN PUTNIH TROSKOVA', {
+      page2.drawText('OBRACUN PUTNIH TROŠKOVA', {
         x: 150,
         y: 770,
       });
@@ -748,21 +782,13 @@ const PregledPutniNalog = () => {
         size: 12
       });
 
-      page2.drawText('Za obavljeno sluzbeno putovanje u: ______________________', {
+      page2.drawText('Za obavljeno službeno putovanje u: ______________________', {
         x: 50,
         y: 720,
         size: 12
       });
 
-      // Split the date string into an array [year, month, day]
-      const dateParts = nalog.datum_odlaska.split("-");
-
-      // Extract the year and day from the array
-      const year = dateParts[0];
-      const month = dateParts[1];
-      const day = dateParts[2];
-
-      page2.drawText(`${day}.${month}.${year}.`, {
+      page2.drawText(`${day}.${month}.${year}`, {
         x: 260,
         y: 700,
         size: 12
@@ -869,7 +895,7 @@ const PregledPutniNalog = () => {
       });
 
       page2.setFont(helveticaBoldFont); // Bold font      
-      page2.drawText("1. OBRACUN PRIJEVOZNIH TROSKOVA", {
+      page2.drawText("1. OBRACUN PRIJEVOZNIH TROŠKOVA", {
         x: table1StartX + 170,
         y: table1StartY - 15,
         size: 9
@@ -882,7 +908,7 @@ const PregledPutniNalog = () => {
         size: 9
       });
 
-      page2.drawText("Zavrsno stanje brojila __________________", {
+      page2.drawText("Završno stanje brojila __________________", {
         x: table1StartX + 170,
         y: table1StartY - 35,
         size: 9
@@ -900,7 +926,7 @@ const PregledPutniNalog = () => {
         size: 9
       });
 
-      page2.drawText("Svoza za prijevoz", {
+      page2.drawText("Svota za prijevoz", {
         x: table1StartX + 390,
         y: table1StartY - 55,
         size: 9
@@ -912,14 +938,14 @@ const PregledPutniNalog = () => {
         size: 9
       });
 
-      page2.drawText("Od", {
+      page2.drawText("Do", {
         x: table1StartX + 115,
         y: table1StartY - 75,
         size: 9
       });
 
       page2.setFont(helveticaBoldFont); // Bold font      
-      page2.drawText("Ukupno", {
+      page2.drawText("UKUPNO", {
         x: table1StartX + 60,
         y: table1StartY - 152,
         size: 12
@@ -973,16 +999,17 @@ const PregledPutniNalog = () => {
           if (row === 0 && col === 0) {
             x = x + 80
             page2.setFont(helveticaBoldFont); // Bold font
-            cellText = '2. OBRACUN OSTALIH TROSKOVA'
+            cellText = '2. OBRACUN OSTALIH TROŠKOVA'
           } else if (row === 0 && col === 1) {
             x = x + 140
             cellText = 'SVOTA'
           } else if (row === 5 && col === 0) {
             x = x + 80
-            cellText = 'UKUPNO OSTALI TROSKOVI'
+            cellText = 'UKUPNO OSTALI TROŠKOVI'
           } else if (row === 6 && col === 0) {
             x = x + 30
-            cellText = '3. UKUPNO NASTALI TROSKOVI NA SLUZBENOM PUTU'
+            page2.setFont(helveticaBoldFont);
+            cellText = '3. UKUPNO NASTALI TROŠKOVI NA SLUŽBENOM PUTU'
           } else if (row === 7 && col === 0) {
             x = x + 70
             cellText = '4. Umanjenje za isplaceni predujam'
@@ -1001,7 +1028,7 @@ const PregledPutniNalog = () => {
       }
 
       page2.setFont(helveticaBoldFont); // Bold font
-      page2.drawText("6. IZVJESCE SA SLUZBENOG PUTA", {
+      page2.drawText("6. IZVJEŠCE SA SLUŽBENOG PUTA", {
         x: 50,
         y: 230,
         size: 12
@@ -1014,10 +1041,16 @@ const PregledPutniNalog = () => {
         size: 9
       });
 
-      page2.drawText("Potvrdujem da je sluzbeno putovanje prema ovom nalogu obavljeno te da se isplata moze obaviti.", {
+      page2.drawText("Potvrdujem da je službeno putovanje prema ovom nalogu obavljeno te da se isplata moze obaviti.", {
         x: 50,
         y: 170,
         size: 9
+      });
+
+      page2.drawText(`${month} mjesecu                                             ${day}`, {
+        x: 80,
+        y: 150, 
+        size: 10
       });
 
       page2.drawText("U __________________, dana ____________________________.", {
@@ -1044,7 +1077,7 @@ const PregledPutniNalog = () => {
         size: 10
       });
 
-      page2.drawText("Pregldao likvidator", {
+      page2.drawText("Pregledao likvidator", {
         x: 250,
         y: 80,
         size: 9
@@ -1072,26 +1105,42 @@ const PregledPutniNalog = () => {
       saveAs(pdfBlob, `putni-nalog-${nalog.rbr}.pdf`);
     }
 
-  return (
-    <>
-        <NavigationJSX/>
-        {nalog &&
-         <>
-            <h1>Redni Broj: {nalog.rbr}</h1>
-            <h1>Polazište: {nalog.polaziste}</h1>
-            <h1>Odredište: {nalog.odrediste}</h1>
-            <h1>Svrha: {nalog.svrha}</h1>
-            <h1>Datum odlaska: {nalog.datum_odlaska}</h1>
-            <h1>Broj dana: {nalog.broj_dana}</h1>
-            <h1>Zaposlenici:</h1> {nalog.zaposlenici.map((zaposlenik, i) => {
-              return <h1 key={i}>{zaposlenik.ime} {zaposlenik.prezime}</h1>
-            })}
-            <h1>Odobreno: {nalog.odobreno ? 'Odobreno je' : 'Nije Odobreno'}</h1>
-            <button onClick={onPrint}>Ispis</button>
-          </>
-        }
-    </>
-  );
+    return (
+      <>
+      <NavigationJSX/>
+      {nalog &&
+      <>
+        <div className="warrant-container">
+          <Card className="warrant-card">
+            <Card.Header className="mt-2"><strong>Putni nalog {nalog.rbr}</strong></Card.Header>
+            <Card.Img 
+              variant="top" 
+              src={travel_wallpaper} 
+              className="warrant-img"
+            />
+            <Card.Body>
+              <Card.Subtitle className="mb-2 text-bold">
+                {nalog.polaziste} - {nalog.odrediste}
+              </Card.Subtitle>
+              <Card.Text><strong>Svrha:</strong> {nalog.svrha}</Card.Text>
+              <Card.Text><strong>Datum odlaska:</strong> {nalog.datum_odlaska}</Card.Text>
+              <Card.Text><strong>Broj dana:</strong> {nalog.broj_dana}</Card.Text>
+              <Card.Text><strong>Odobreno:</strong> {nalog.odobreno ? 'Da' : 'Ne'}</Card.Text>
+              
+              <ListGroup variant="flush">
+                <ListGroup.Item><strong>Zaposlenici:</strong></ListGroup.Item>
+                {nalog.zaposlenici.map((employee, i) => (
+                  <ListGroup.Item key={i}>{employee.ime} {employee.prezime}</ListGroup.Item>
+                ))}
+              </ListGroup>
+            </Card.Body>
+            <Button className="mt-2" variant="primary" onClick={onPrint}>Ispis</Button>
+          </Card>
+        </div>
+      </>
+      }
+      </>
+    )
 };
 
 export default PregledPutniNalog;

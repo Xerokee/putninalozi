@@ -1,0 +1,21 @@
+.warrant-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.warrant-card {
+    width: 30rem; 
+    margin: 20px;
+}
+
+.warrant-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 105px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
