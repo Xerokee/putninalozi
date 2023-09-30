@@ -13,6 +13,7 @@ include 'Osoba.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $data = json_decode(file_get_contents("php://input"), true);
 
+  // $rbr = $data['rbr'];
   $sPolaziste = $data['polaziste'];
   $sOdrediste = $data["odrediste"];
   $sSvrha = $data['svrha'];
@@ -23,14 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   try
   {
+    //   $sQuery = "INSERT INTO putninalog (polaziste, odrediste, svrha, datum_odlaska, broj_dana, odobreno, id)
+    // VALUES (?, ?, ?, ?, ?, ?, ?)";
+    //   $oRecord = $oConnection->prepare($sQuery);
+    //   $result = $oRecord->execute([$sPolaziste, $sOdrediste, $sSvrha, $sDatumOdlaska, $sBrojDana, $odobreno, $rbr]);
+
       $sQuery = "INSERT INTO putninalog (polaziste, odrediste, svrha, datum_odlaska, broj_dana, odobreno)
-    VALUES (?, ?, ?, ?, ?, ?)";
-      $oRecord = $oConnection->prepare($sQuery);
-      $result = $oRecord->execute([$sPolaziste, $sOdrediste, $sSvrha, $sDatumOdlaska, $sBrojDana, $odobreno]);
+      VALUES (?, ?, ?, ?, ?, ?)";
+        $oRecord = $oConnection->prepare($sQuery);
+        $result = $oRecord->execute([$sPolaziste, $sOdrediste, $sSvrha, $sDatumOdlaska, $sBrojDana, $odobreno]);
   
       if ($result) {
         // Retrieve the ID of the newly inserted row
         $insertedId = $oConnection->lastInsertId();
+
+        $sQuery = "UPDATE putninalog SET id = :id WHERE `r.br.` = :id";
+        $stmt = $oConnection->prepare($sQuery);
+        $stmt->bindParam(':id', $insertedId);
+        $stmt->execute();
 
         foreach ($zaposlenici as &$zaposlenik) {
           $podaciZaposelnika = explode(" ", $zaposlenik['zaposlenik']);

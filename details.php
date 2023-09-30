@@ -18,6 +18,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt->execute();
     $oRow = $stmt->fetch(PDO::FETCH_BOTH); // get the mysqli result
 
+    $id = $oRow['id'];
     $rbr = $oRow['r.br.'];
     $polaziste = $oRow['polaziste'];
     $odrediste = $oRow['odrediste'];
@@ -26,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
     $broj_dana = $oRow['broj_dana'];
     $odobreno = $oRow['odobreno'];
 
-    $oPutniNalog = new PutniNalog($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno);
+    $oPutniNalog = new PutniNalog($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno, $id);
 
     $sQuery = "SELECT * FROM zaposlenici_nalog WHERE `rbrNaloga` = :rbr"; // SQL with parameters
     $oRecord = $oConnection->prepare($sQuery); 

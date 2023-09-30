@@ -10,6 +10,7 @@ import hr from 'date-fns/locale/hr';
 registerLocale('hr', hr)
 
 export default function DodajPutniNalog() {
+  // const [RedniBroj, setRedniBroj] = useState("");
   const [Polaziste, setPolaziste] = useState("");
   const [Odrediste, setOdrediste] = useState("");
   const [Svrha, setSvrha] = useState("");
@@ -48,6 +49,7 @@ export default function DodajPutniNalog() {
       }
 
       await axios.post("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/create.php", {
+        // "rbr": parseInt(RedniBroj),
         "polaziste": Polaziste,
         "odrediste": Odrediste,
         "svrha": Svrha,
@@ -72,6 +74,11 @@ export default function DodajPutniNalog() {
       <NavigationJSX />
       <div className='h-100 d-flex align-items-center justify-content-center'>
         <form onSubmit={handleSubmit}>
+          {/* <div className='form-group mt-2'>
+            <label>Unesite redni broj:
+              <input className='form-control' type="number" value={RedniBroj} onChange={(e) => setRedniBroj(e.target.value)} />
+            </label>
+          </div> */}
           <div className='form-group mt-2'>
             <label>Unesite Polazište:
               <input className='form-control' type="text" value={Polaziste} onChange={(e) => setPolaziste(e.target.value)} />

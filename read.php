@@ -53,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
     {
         $rbr = $oRow['r.br.'];
+        $id = $oRow['id'];
         $polaziste = $oRow['polaziste'];
         $odrediste = $oRow['odrediste'];
         $svrha = $oRow['svrha'];
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         $broj_dana = $oRow['broj_dana'];
         $odobreno = $oRow['odobreno'];
 
-        $oPutniNalog = new PutniNalog($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno);
+        $oPutniNalog = new PutniNalog($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno, $id);
         $oPutniNalozi[$rbr] = $oPutniNalog;
     }
 

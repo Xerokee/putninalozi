@@ -3,6 +3,7 @@
 class PutniNalog
 {
     public $rbr = "";
+	public $id = "";
 	public $polaziste = "";
 	public $odrediste = "";
 	public $svrha = "";
@@ -12,9 +13,10 @@ class PutniNalog
 	public $zaposlenici_imena;
 	public $zaposlenici;
 
-	public function __construct($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno)
+	public function __construct($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno, $id)
 	{
         $this->rbr = $rbr;
+		$this->id = $id;
 		$this->polaziste = $polaziste;
 		$this->odrediste = $odrediste;
 		$this->svrha = $svrha;

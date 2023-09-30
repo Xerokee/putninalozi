@@ -110,53 +110,51 @@ export default function ParentComponent() {
       width: '7%'
     },
     {
+      name: 'ID',
+      selector: row => row.id,
+      width: '5%'
+    },
+    {
       name: 'R.br.',
       selector: row => row.rbr,
       sortable: true,
-      width: '7%'
+      width: '6%'
     },
     {
       name: 'Polazište',
       selector: row => row.polaziste,
-      sortable: true,
       width: '9%'
     },
     {
       name: 'Odredište',
       selector: row => row.odrediste,
-      sortable: true,
       width: '8%'
     },
     {
       name: 'Svrha',
       selector: row => row.svrha,
-      sortable: true,
-      width: '15%'
+      width: '12%'
     },
     {
       name: 'Datum Odlaska',
       selector: row => row.datum_odlaska,
-      sortable: true,
       width: '11%'
     },
     {
       name: 'Broj dana',
       selector: row => row.broj_dana,
-      sortable: true,
-      width: '8%'
+      width: '7%'
     },
     {
       name: 'Zaposlenici',
       selector: row => row.zaposlenici_imena,
       format: (row) => row.zaposlenici_imena.join(", "),
-      sortable: true,
-      width: '18%'
+      width: '10%'
     },
     {
       name: 'Odobreno',
       selector: row => row.odobreno,
       format: (row) => row.odobreno ? 'Odobreno je' : 'Nije Odobreno',
-      sortable: true,
       width: '9%'
     },
     {
