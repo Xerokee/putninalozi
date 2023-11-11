@@ -27,6 +27,7 @@ export default function DodajPutniNalog() {
       try {
         const response = await axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/create.php");
         const zaposlenici = response.data;
+        console.log(zaposlenici)
         setZaposlenici(Object.values(zaposlenici));
       } catch (err) {
         console.log(err);
