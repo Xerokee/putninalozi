@@ -120,6 +120,7 @@ export default function ParentComponent() {
     {
       name: 'R.br.',
       selector: row => row.rbr,
+      sortable: true,
       width: '6%'
     },
     {
