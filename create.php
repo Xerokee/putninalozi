@@ -13,24 +13,36 @@ include 'Osoba.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $data = json_decode(file_get_contents("php://input"), true);
 
+  // $rbr = $data['rbr'];
   $sPolaziste = $data['polaziste'];
   $sOdrediste = $data["odrediste"];
   $sSvrha = $data['svrha'];
   $sDatumOdlaska = $data["datum_odlaska"];
+  $sDatumDolaska = $data["datum_dolaska"];
   $sBrojDana = $data["broj_dana"];
   $zaposlenici = $data["zaposlenici"];
   $odobreno = $data["odobreno"];
 
   try
   {
-      $sQuery = "INSERT INTO putninalog (polaziste, odrediste, svrha, datum_odlaska, broj_dana, odobreno)
-    VALUES (?, ?, ?, ?, ?, ?)";
-      $oRecord = $oConnection->prepare($sQuery);
-      $result = $oRecord->execute([$sPolaziste, $sOdrediste, $sSvrha, $sDatumOdlaska, $sBrojDana, $odobreno]);
+    //   $sQuery = "INSERT INTO putninalog (polaziste, odrediste, svrha, datum_odlaska, broj_dana, odobreno, id)
+    // VALUES (?, ?, ?, ?, ?, ?, ?)";
+    //   $oRecord = $oConnection->prepare($sQuery);
+    //   $result = $oRecord->execute([$sPolaziste, $sOdrediste, $sSvrha, $sDatumOdlaska, $sBrojDana, $odobreno, $rbr]);
+
+      $sQuery = "INSERT INTO putninalog (polaziste, odrediste, svrha, datum_odlaska, datum_dolaska, broj_dana, odobreno)
+      VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $oRecord = $oConnection->prepare($sQuery);
+        $result = $oRecord->execute([$sPolaziste, $sOdrediste, $sSvrha, $sDatumOdlaska, $sDatumDolaska, $sBrojDana, $odobreno]);
   
       if ($result) {
         // Retrieve the ID of the newly inserted row
         $insertedId = $oConnection->lastInsertId();
+
+        $sQuery = "UPDATE putninalog SET id = :id WHERE `r.br.` = :id";
+        $stmt = $oConnection->prepare($sQuery);
+        $stmt->bindParam(':id', $insertedId);
+        $stmt->execute();
 
         foreach ($zaposlenici as &$zaposlenik) {
           $podaciZaposelnika = explode(" ", $zaposlenik['zaposlenik']);
@@ -62,8 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $ime = $oRow['ime'];
       $prezime = $oRow['prezime'];
       $godiste = $oRow['godiste'];
+      $datumRodjenja = $oRow['datumRodjenja'];
 
-      $oOsobe[$sifraOsobe] = new Osoba ($sifraOsobe, $ime, $prezime, $godiste);
+      $oOsobe[$sifraOsobe] = new Osoba ($sifraOsobe, $ime, $prezime, $godiste, $datumRodjenja);
   }
 
   $sQuery = "SELECT * FROM zaposlenik";
@@ -75,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $sifraZaposlenika = $oRow['sifra'];
       $sifraOsobe = $oRow['sifra_osobe'];
 
-      $data[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika);
+      $data[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika, $oOsobe [$datumRodjenja]-> dohvatiDatumRodjenja());
   }
 
   echo json_encode($data);

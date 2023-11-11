@@ -41,6 +41,12 @@ export function UrediZaposlenika({ zaposlenik, onSave, onCancel }) {
         value={editedEmployee.godiste || ''}
         onChange={handleChange}
       />
+      <input
+        type="text"
+        name="datumRodjenja"
+        value={editedEmployee.datumRodjenja || ''}
+        onChange={handleChange}
+      />
       <div style={{ marginTop: '1rem' }}>
         <button style={{ marginRight: '0.5rem' }} onClick={handleSave}>
           Spremi

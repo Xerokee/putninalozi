@@ -6,13 +6,15 @@ class Osoba
     public $ime;
     public $prezime;
     public $godiste;
+    public $datumRodjenja;
     
-    public function __construct($sifra, $ime, $prezime, $godiste) 
+    public function __construct($sifra, $ime, $prezime, $godiste, $datumRodjenja) 
     {
         $this->sifra = $sifra;
         $this->ime = $ime;
         $this->prezime = $prezime;
         $this->godiste = $godiste;
+        $this->datumRodjenja = $datumRodjenja;
     }
 
     public function dohvatiSifru() 
@@ -34,15 +36,20 @@ class Osoba
     {
         return $this->godiste;
     }
+
+    public function dohvatiDatumRodjenja() 
+    {
+        return $this->datumRodjenja;
+    }
 }
 
 class Zaposlenik extends Osoba 
 {
     public $sifraZaposlenika;
     
-    public function __construct($sifra, $ime, $prezime, $godiste, $sifraZaposlenika) 
+    public function __construct($sifra, $ime, $prezime, $godiste, $sifraZaposlenika, $datumRodjenja) 
     {
-        parent::__construct($sifra, $ime, $prezime, $godiste);
+        parent::__construct($sifra, $ime, $prezime, $godiste, $datumRodjenja);
         $this->sifraZaposlenika = $sifraZaposlenika;
     }
     

@@ -10,6 +10,7 @@ export function DodajZaposlenika() {
   const [ime, setIme] = useState('');
   const [prezime, setPrezime] = useState('');
   const [godiste, setGodiste] = useState('');
+  const [datumrodjenja, setdatumRodjenja] = useState('');
   const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
@@ -27,6 +28,7 @@ export function DodajZaposlenika() {
         "ime": ime,
         "prezime": prezime,
         "godiste": godiste,
+        "datumRodjenja": datumrodjenja,
       });
 
       toast.success('Uspješno ste kreirali novog zaposlenika');
@@ -55,6 +57,10 @@ export function DodajZaposlenika() {
           <div className="form-group mt-2">
             <label>Unesite Godište:</label>
             <input className="form-control" type="text" value={godiste} onChange={(e) => setGodiste(e.target.value)} />
+          </div>
+          <div className="form-group mt-2">
+            <label>Unesite Datum rođenja:</label>
+            <input className="form-control" type="text" value={datumrodjenja} onChange={(e) => setdatumRodjenja(e.target.value)} />
           </div>
           <div className="text-center">
             <input className="btn btn-primary mt-2" type="submit" value="Dodaj" />

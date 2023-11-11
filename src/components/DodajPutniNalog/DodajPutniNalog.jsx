@@ -10,10 +10,12 @@ import hr from 'date-fns/locale/hr';
 registerLocale('hr', hr)
 
 export default function DodajPutniNalog() {
+  // const [RedniBroj, setRedniBroj] = useState("");
   const [Polaziste, setPolaziste] = useState("");
   const [Odrediste, setOdrediste] = useState("");
   const [Svrha, setSvrha] = useState("");
   const [Datum_odlaska, setDatumOdlaska] = useState("");
+  const [Datum_dolaska, setDatumDolaska] = useState("");
   const [Broj_dana, setBrojDana] = useState("");
   const [Zaposlenici, setZaposlenici] = useState([]);
   const [NoviZaposlenici, setNoviZaposlenici] = useState([]);
@@ -48,10 +50,12 @@ export default function DodajPutniNalog() {
       }
 
       await axios.post("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/create.php", {
+        // "rbr": parseInt(RedniBroj),
         "polaziste": Polaziste,
         "odrediste": Odrediste,
         "svrha": Svrha,
         "datum_odlaska": Datum_odlaska,
+        "datum_dolaska": Datum_dolaska,
         "broj_dana": Broj_dana,
         "zaposlenici": NoviZaposlenici,
         "odobreno": Odobreno
@@ -72,6 +76,11 @@ export default function DodajPutniNalog() {
       <NavigationJSX />
       <div className='h-100 d-flex align-items-center justify-content-center'>
         <form onSubmit={handleSubmit}>
+          {/* <div className='form-group mt-2'>
+            <label>Unesite redni broj:
+              <input className='form-control' type="number" value={RedniBroj} onChange={(e) => setRedniBroj(e.target.value)} />
+            </label>
+          </div> */}
           <div className='form-group mt-2'>
             <label>Unesite Polazište:
               <input className='form-control' type="text" value={Polaziste} onChange={(e) => setPolaziste(e.target.value)} />
@@ -96,6 +105,18 @@ export default function DodajPutniNalog() {
           selected={Datum_odlaska}
           locale="hr"
           onChange={(date) => setDatumOdlaska(date)}
+          dateFormat="dd/MM/yyyy"
+        />
+        </div>
+        <div className='form-group mt-2'>
+        <label>Unesite Datum Dolaska:</label>
+      </div>
+      <div className='form-group'>
+        <DatePicker
+          className='form-control'
+          selected={Datum_dolaska}
+          locale="hr"
+          onChange={(date) => setDatumDolaska(date)}
           dateFormat="dd/MM/yyyy"
         />
         </div>

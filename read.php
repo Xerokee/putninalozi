@@ -53,14 +53,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     while ($oRow = $oRecord->fetch(PDO::FETCH_BOTH)) 
     {
         $rbr = $oRow['r.br.'];
+        $id = $oRow['id'];
         $polaziste = $oRow['polaziste'];
         $odrediste = $oRow['odrediste'];
         $svrha = $oRow['svrha'];
         $datum_odlaska = $oRow['datum_odlaska'];
+        $datum_dolaska = $oRow['datum_dolaska'];
         $broj_dana = $oRow['broj_dana'];
         $odobreno = $oRow['odobreno'];
 
-        $oPutniNalog = new PutniNalog($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $broj_dana, $odobreno);
+        $oPutniNalog = new PutniNalog($rbr, $polaziste, $odrediste, $svrha, $datum_odlaska, $datum_dolaska, $broj_dana, $odobreno, $id);
         $oPutniNalozi[$rbr] = $oPutniNalog;
     }
 
@@ -74,8 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         $ime = $oRow['ime'];
         $prezime = $oRow['prezime'];
         $godiste = $oRow['godiste'];
+        $datumRodjenja = $oRow['datumRodjenja'];
 
-        $oOsobe[$sifraOsobe] = new Osoba ($sifraOsobe, $ime, $prezime, $godiste);
+        $oOsobe[$sifraOsobe] = new Osoba ($sifraOsobe, $ime, $prezime, $godiste, $datumRodjenja);
     }
 
     $sQuery = "SELECT * FROM zaposlenik";
@@ -87,7 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         $sifraZaposlenika = $oRow['sifra'];
         $sifraOsobe = $oRow['sifra_osobe'];
 
-        $oZaposlenici[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika);
+        $oZaposlenici[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(),
+        $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika, $oOsobe [$sifraOsobe]-> dohvatiDatumRodjenja());
     }
 
     $sQuery = "SELECT * FROM zaposlenici_nalog";

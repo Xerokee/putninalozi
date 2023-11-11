@@ -59,6 +59,7 @@ export function ZaposleniciTable() {
               <th>Ime</th>
               <th>Prezime</th>
               <th>Godište</th>
+              <th>Datum rođenja</th>
               <th>Uređivanje</th>
             </tr>
           </thead>
@@ -68,6 +69,7 @@ export function ZaposleniciTable() {
                 <td>{item.ime}</td>
                 <td>{item.prezime}</td>
                 <td>{item.godiste}</td>
+                <td>{item.datumRodjenja}</td>
                 <td>
                   <button onClick={() => handleEdit(i)}>Uredi</button>
                 </td>

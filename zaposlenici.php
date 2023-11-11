@@ -15,12 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ime = $data['ime'];
     $prezime = $data["prezime"];
     $godiste = $data['godiste'];
+    $datumRodjenja = $data['datumRodjenja'];
 
     try
     {
-        $sQuery = "INSERT INTO osoba (ime, prezime, godiste) VALUES (?, ?, ?)";
+        $sQuery = "INSERT INTO osoba (ime, prezime, godiste, datumRodjenja) VALUES (?, ?, ?, ?)";
         $oRecord = $oConnection->prepare($sQuery);
-        $result = $oRecord->execute([$ime, $prezime, $godiste]);
+        $result = $oRecord->execute([$ime, $prezime, $godiste, $datumRodjenja]);
 
         if($result) {
             // Retrieve the ID of the newly inserted row
@@ -71,8 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ime = $oRow['ime'];
         $prezime = $oRow['prezime'];
         $godiste = $oRow['godiste'];
+        $datumRodjenja = $oRow['datumRodjenja'];
 
-        array_push($oOsobe, new Osoba ($sifraOsobe, $ime, $prezime, $godiste));
+        array_push($oOsobe, new Osoba ($sifraOsobe, $ime, $prezime, $godiste, $datumRodjenja));
     }
     
     echo json_encode($oOsobe);
@@ -83,12 +85,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ime = $data['ime'];
     $prezime = $data['prezime'];
     $godiste = $data['godiste'];
+    $datumRodjenja = $data['datumRodjenja'];
 
-    $sQuery = "UPDATE osoba SET ime = :ime, prezime = :prezime, godiste = :godiste WHERE `sifra` = :sifra";
+    $sQuery = "UPDATE osoba SET ime = :ime, prezime = :prezime, godiste = :godiste, datumRodjenja = :datumRodjenja WHERE `sifra` = :sifra";
     $stmt = $oConnection->prepare($sQuery);
     $stmt->bindParam(':ime', $ime);
     $stmt->bindParam(':prezime', $prezime);
     $stmt->bindParam(':godiste', $godiste);
+    $stmt->bindParam(':datumRodjenja', $datumRodjenja);
     $stmt->bindParam(':sifra', $sifraOsobe);
     $stmt->execute();
 

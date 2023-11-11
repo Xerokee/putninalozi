@@ -556,6 +556,14 @@ const PregledPutniNalog = () => {
       const year = dateParts[0];
       const month = dateParts[1];
       const day = dateParts[2];
+
+      // Split the date string into an array [year, month, day]
+      const dateParts2 = nalog.datum_dolaska.split("-");
+
+      // Extract the year and day from the array
+      const year2 = dateParts2[0];
+      const month2 = dateParts2[1];
+      const day2 = dateParts2[2];
       
       // Create a new PDF document
       const pdfDoc = await PDFDocument.create();
@@ -797,6 +805,12 @@ const PregledPutniNalog = () => {
       page2.drawText('Na putovanje sam krenuo/la dana: ______________________', {
         x: 50,
         y: 700,
+        size: 12
+      });
+
+      page2.drawText(`${day2}.${month2}.${year2}`, {
+        x: 260,
+        y: 680,
         size: 12
       });
 
@@ -1124,6 +1138,7 @@ const PregledPutniNalog = () => {
               </Card.Subtitle>
               <Card.Text><strong>Svrha:</strong> {nalog.svrha}</Card.Text>
               <Card.Text><strong>Datum odlaska:</strong> {nalog.datum_odlaska}</Card.Text>
+              <Card.Text><strong>Datum dolaska:</strong> {nalog.datum_dolaska}</Card.Text>
               <Card.Text><strong>Broj dana:</strong> {nalog.broj_dana}</Card.Text>
               <Card.Text><strong>Odobreno:</strong> {nalog.odobreno ? 'Da' : 'Ne'}</Card.Text>
               
