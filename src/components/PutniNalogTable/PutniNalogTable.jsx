@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import DataTable from 'react-data-table-component';
 
 export default function ParentComponent() {
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [sortOrder, setSortOrder] = useState('asc');
@@ -105,6 +105,14 @@ export default function ParentComponent() {
 
     setFilteredPosts(filtered);
   };
+
+  useEffect(() => {
+    if (searchQuery.length === 0)
+    {
+      setFilteredPosts(post)
+    }
+    console.log(searchQuery)
+  }, [searchQuery]);
 
   const columns = [
     {

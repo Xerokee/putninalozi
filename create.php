@@ -88,7 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $sifraZaposlenika = $oRow['sifra'];
       $sifraOsobe = $oRow['sifra_osobe'];
 
-      $data[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika, $oOsobe [$sifraOsobe]-> dohvatiDatumRodjenja());
+      $data[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), 
+      $sifraZaposlenika,
+      $oOsobe [$sifraOsobe]-> dohvatiDatumRodjenja());
   }
 
   echo json_encode($data);
