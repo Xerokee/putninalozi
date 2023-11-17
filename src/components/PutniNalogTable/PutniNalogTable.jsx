@@ -49,6 +49,7 @@ export default function ParentComponent() {
     axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/read.php")
       .then((res) => {
         const dataArray = Object.values(res.data);
+        // dataArray.forEach(element => element.Vjezba = "Vjezba123");
         console.log(res);
         console.log(dataArray)
         setPost(dataArray);

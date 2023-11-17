@@ -14,7 +14,7 @@ export function ZaposleniciTable() {
   useEffect(() => {
     axios.get("http://localhost:8012/VUV%20Putni%20Nalozi/putninalozi/zaposlenici.php")
       .then((res) => {
-        zaposlenici.forEach(element => element.Vjezba = "Vjezba123");
+        // res.data.forEach(element => element.Vjezba = "Vjezba123");
         setZaposlenici(res.data)
         setFilteredZaposlenici(res.data)
       })
