@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try
     {
-        $sQuery = "INSERT INTO osoba (ime, prezime, godiste, datumRodjenja, vrstaZaposlenika, vjezba) VALUES (?, ?, ?, ?)";
+        $sQuery = "INSERT INTO osoba (ime, prezime, godiste, datumRodjenja) VALUES (?, ?, ?, ?)";
         $oRecord = $oConnection->prepare($sQuery);
         $result = $oRecord->execute([$ime, $prezime, $godiste, $datumRodjenja]);
 
@@ -86,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prezime = $data['prezime'];
     $godiste = $data['godiste'];
     $datumRodjenja = $data['datumRodjenja'];
-    $vjezba = $data['vjezba'];
 
     $sQuery = "UPDATE osoba SET ime = :ime, prezime = :prezime, godiste = :godiste, datumRodjenja = :datumRodjenja WHERE `sifra` = :sifra";
     $stmt = $oConnection->prepare($sQuery);

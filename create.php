@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   try
   {
-    //   $sQuery = "INSERT INTO putninalog (polaziste, odrediste, svrha, datum_odlaska, broj_dana, odobreno, id)
-    // VALUES (?, ?, ?, ?, ?, ?, ?)";
+    //   $sQuery = "INSERT INTO putninalog (polaziste, odrediste, svrha, datum_odlaska, datum_dolaska, broj_dana, odobreno, id)
+    // VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     //   $oRecord = $oConnection->prepare($sQuery);
-    //   $result = $oRecord->execute([$sPolaziste, $sOdrediste, $sSvrha, $sDatumOdlaska, $sBrojDana, $odobreno, $rbr]);
+    //   $result = $oRecord->execute([$sPolaziste, $sOdrediste, $sSvrha, $sDatumOdlaska, $sDatumDolaska, $sBrojDana, $odobreno, $rbr]);
 
       $sQuery = "INSERT INTO putninalog (polaziste, odrediste, svrha, datum_odlaska, datum_dolaska, broj_dana, odobreno)
       VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $sifraZaposlenika = $oRow['sifra'];
       $sifraOsobe = $oRow['sifra_osobe'];
 
-      $data[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), 
-      $sifraZaposlenika,
+      $data[$sifraZaposlenika] = new Zaposlenik ($oOsobe [$sifraOsobe]-> dohvatiSifru(), $oOsobe [$sifraOsobe]-> dohvatiIme(), 
+      $oOsobe [$sifraOsobe]-> dohvatiPrezime(), $oOsobe [$sifraOsobe]-> dohvatiGodiste(), $sifraZaposlenika,
       $oOsobe [$sifraOsobe]-> dohvatiDatumRodjenja());
   }
 
